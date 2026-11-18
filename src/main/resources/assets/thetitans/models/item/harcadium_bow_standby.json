@@ -1,0 +1,4 @@
+{
+  "parent": "item/bow",
+  "textures": { "layer0": "thetitans:items/new/harcadium_bow_standby" }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "thetitans:items/new/custom_sword_blade",
+    "layer1": "thetitans:items/new/custom_sword_handle",
+    "layer2": "thetitans:items/new/custom_sword_hilt",
+    "layer3": "thetitans:items/new/custom_sword_butt"
+  }
+}

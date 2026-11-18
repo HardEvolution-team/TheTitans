@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "thetitans:blocks/new/malgrum_stage_0"
+  }
+}

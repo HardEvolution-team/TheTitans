@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:gold_ingot"
+    },
+    "title": {
+      "translate": "achievement.goldguard"
+    },
+    "description": {
+      "translate": "achievement.goldguard.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "thetitans:zombie",
+  "criteria": {
+    "granted": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

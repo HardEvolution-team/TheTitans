@@ -1,0 +1,4 @@
+{
+  "parent": "block/crop",
+  "textures": { "crop": "thetitans:blocks/new/malgrum_stage_2" }
+}

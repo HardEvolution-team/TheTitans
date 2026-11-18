@@ -1,0 +1,4 @@
+{
+  "parent": "item/bow",
+  "textures": { "layer0": "thetitans:items/new/void_bow_pulling_1" }
+}

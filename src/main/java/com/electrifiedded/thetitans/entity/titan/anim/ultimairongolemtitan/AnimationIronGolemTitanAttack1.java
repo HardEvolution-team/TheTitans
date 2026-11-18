@@ -1,0 +1,76 @@
+package com.electrifiedded.thetitans.entity.titan.anim.ultimairongolemtitan;
+
+import com.electrifiedded.thehippomaster.AnimationAPI.AIAnimation;
+import com.electrifiedded.thehippomaster.AnimationAPI.AnimationAPI;
+import com.electrifiedded.thetitans.entity.titan.EntityIronGolemTitan;
+import com.electrifiedded.thetitans.sound.SoundHandler;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.util.math.Vec3d;
+
+import java.util.List;
+
+public class AnimationIronGolemTitanAttack1 extends AIAnimation {
+    private EntityIronGolemTitan entity;
+
+    public AnimationIronGolemTitanAttack1(EntityIronGolemTitan test) {
+        super(test);
+        this.entity = test;
+    }
+
+    public int getAnimID() {
+        return 6;
+    }
+
+    public boolean isAutomatic() {
+        return true;
+    }
+
+    public int getDuration() {
+        return 70;
+    }
+
+    public boolean shouldContinueExecuting() {
+        return this.entity.getAnimTick() > 70 ? false : super.shouldContinueExecuting();
+    }
+
+    public void updateTask() {
+        if ((this.entity.getAnimTick() < 30) && (this.entity.getAttackTarget() != null)) {
+            this.entity.getLookHelper().setLookPositionWithEntity(this.entity.getAttackTarget(), 5.0F, 40.0F);
+        }
+
+        if (entity.isClient() && this.entity.getAnimTick() == 34) {
+            com.electrifiedded.thetitans.sound.SoundHandler.whenPlayMob("thetitans:titanSwing", this.entity.world, this.entity, 100F, 1F);
+            com.electrifiedded.thetitans.sound.SoundHandler.whenPlayMob("mob.irongolem.throw", this.entity.world, this.entity, 100.0F, 0.5F);
+            com.electrifiedded.thetitans.sound.SoundHandler.whenPlayMob("mob.irongolem.throw", this.entity.world, this.entity, 100.0F, 0.5F);
+        }
+
+        if (this.entity.getAnimTick() == 38) {
+            double d8 = 48D;
+            Vec3d vec3 = this.entity.getLook(1.0F);
+            double dx = vec3.x * d8;
+            double dz = vec3.z * d8;
+            this.entity.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
+            this.entity.fetchAmountKnockback();
+            if (entity.isClient())
+                this.entity.shakeUserCamerasNearby(10D);
+            List<?> found11 = this.entity.world.getEntitiesWithinAABBExcludingEntity(this.entity, this.entity.getEntityBoundingBox().expand(48D, 16D, 48D).offset(dx, -16D, dz));
+            if ((found11 != null) && (!found11.isEmpty())) {
+                for (Object mobRef1Obj : found11) {
+                    Entity mobRef1 = (Entity) mobRef1Obj;
+                    if (this.entity.allowStrikeGiant(mobRef1.getClass())) {
+                        this.entity.attackEntityAsMob(mobRef1);
+                        this.entity.attackEntityAsMob(mobRef1);
+                    }
+                }
+            }
+
+            if (entity.isClient()) {
+                com.electrifiedded.thetitans.sound.SoundHandler.whenPlayMob("thetitans:titanStrike", this.entity.world, this.entity, 20.0F, 1.0F);
+                com.electrifiedded.thetitans.sound.SoundHandler.whenPlayMob("thetitans:titanSlam", this.entity.world, this.entity, 20.0F, 1.0F);
+                com.electrifiedded.thetitans.sound.SoundHandler.whenPlayMob("thetitans:titanStep", this.entity.world, this.entity, 20.0F, 1.0F);
+            }
+        }
+    }
+}

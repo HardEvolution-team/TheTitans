@@ -1,0 +1,15 @@
+{
+  "__comment": "ponytail: dragon-egg shape (vanilla dragon_egg geometry) so perch blocks look like the 1.7.10 egg, not a full cube. Texture supplied by child via #all.",
+  "parent": "block/block",
+  "textures": { "particle": "#all" },
+  "elements": [
+    { "from": [ 3, 0, 3 ],  "to": [ 13, 1, 13 ], "faces": { "down": {"texture":"#all","cullface":"down"}, "up": {"texture":"#all"}, "north": {"texture":"#all"}, "south": {"texture":"#all"}, "west": {"texture":"#all"}, "east": {"texture":"#all"} } },
+    { "from": [ 2, 1, 2 ],  "to": [ 14, 4, 14 ], "faces": { "up": {"texture":"#all"}, "north": {"texture":"#all"}, "south": {"texture":"#all"}, "west": {"texture":"#all"}, "east": {"texture":"#all"} } },
+    { "from": [ 1, 4, 1 ],  "to": [ 15, 7, 15 ], "faces": { "up": {"texture":"#all"}, "north": {"texture":"#all"}, "south": {"texture":"#all"}, "west": {"texture":"#all"}, "east": {"texture":"#all"} } },
+    { "from": [ 0, 7, 0 ],  "to": [ 16, 11, 16 ], "faces": { "up": {"texture":"#all"}, "north": {"texture":"#all"}, "south": {"texture":"#all"}, "west": {"texture":"#all"}, "east": {"texture":"#all"} } },
+    { "from": [ 1, 11, 1 ], "to": [ 15, 13, 15 ], "faces": { "up": {"texture":"#all"}, "north": {"texture":"#all"}, "south": {"texture":"#all"}, "west": {"texture":"#all"}, "east": {"texture":"#all"} } },
+    { "from": [ 2, 13, 2 ], "to": [ 14, 14, 14 ], "faces": { "up": {"texture":"#all"}, "north": {"texture":"#all"}, "south": {"texture":"#all"}, "west": {"texture":"#all"}, "east": {"texture":"#all"} } },
+    { "from": [ 3, 14, 3 ], "to": [ 13, 15, 13 ], "faces": { "up": {"texture":"#all"}, "north": {"texture":"#all"}, "south": {"texture":"#all"}, "west": {"texture":"#all"}, "east": {"texture":"#all"} } },
+    { "from": [ 4, 15, 4 ], "to": [ 12, 16, 12 ], "faces": { "up": {"texture":"#all"}, "north": {"texture":"#all"}, "south": {"texture":"#all"}, "west": {"texture":"#all"}, "east": {"texture":"#all"} } }
+  ]
+}

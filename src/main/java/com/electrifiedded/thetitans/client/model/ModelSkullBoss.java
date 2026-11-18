@@ -1,0 +1,225 @@
+package com.electrifiedded.thetitans.client.model;
+
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+
+/**
+ * SkullBoss - Undefined
+ * Created using Tabula 4.1.1
+ */
+public class ModelSkullBoss extends ModelBase {
+    public ModelRenderer body;
+    public ModelRenderer skull;
+    public ModelRenderer head;
+    public ModelRenderer claw1Left;
+    public ModelRenderer claw1Right;
+    public ModelRenderer upperLeg1Left;
+    public ModelRenderer upperLeg2Left;
+    public ModelRenderer upperLeg3Left;
+    public ModelRenderer upperLeg1Right;
+    public ModelRenderer upperLeg2Right;
+    public ModelRenderer upperLeg3Right;
+    public ModelRenderer irisRight;
+    public ModelRenderer irisLeft;
+    public ModelRenderer claw2Left;
+    public ModelRenderer leftTalonUpper;
+    public ModelRenderer leftTalonLower;
+    public ModelRenderer claw2Right;
+    public ModelRenderer rightTalonUpper;
+    public ModelRenderer rightTalonLower;
+    public ModelRenderer lowerLeg1Left;
+    public ModelRenderer foot1Left;
+    public ModelRenderer lowerLeg2Left;
+    public ModelRenderer foot2Left;
+    public ModelRenderer lowerLeg3Left;
+    public ModelRenderer foot3Left;
+    public ModelRenderer lowerLeg1Right;
+    public ModelRenderer foot1Right;
+    public ModelRenderer lowerLeg2Right;
+    public ModelRenderer foot2Right;
+    public ModelRenderer lowerLeg3Right;
+    public ModelRenderer foot3Right;
+
+    public ModelSkullBoss() {
+        this.textureWidth = 128;
+        this.textureHeight = 128;
+        this.upperLeg2Right = new ModelRenderer(this, 0, 39);
+        this.upperLeg2Right.setRotationPoint(-5.5F, 2.0F, -4.0F);
+        this.upperLeg2Right.addBox(-1.5F, -8.0F, -1.5F, 3, 8, 3, 0.0F);
+        this.assignRotationRotate(upperLeg2Right, 1.0471975511965976F, 1.5707963267948966F, 0.0F);
+        this.leftTalonLower = new ModelRenderer(this, 24, 32);
+        this.leftTalonLower.setRotationPoint(0.0F, -10.0F, -1.0F);
+        this.leftTalonLower.addBox(-0.5F, -4.0F, -1.0F, 1, 4, 2, 0.0F);
+        this.lowerLeg3Right = new ModelRenderer(this, 12, 39);
+        this.lowerLeg3Right.mirror = true;
+        this.lowerLeg3Right.setRotationPoint(0.0F, -8.0F, 0.0F);
+        this.lowerLeg3Right.addBox(-1.5F, -8.0F, -1.5F, 3, 8, 3, 0.0F);
+        this.assignRotationRotate(lowerLeg3Right, 1.0471975511965976F, 0.17453292519943295F, 0.0F);
+        this.body = new ModelRenderer(this, 0, 0);
+        this.body.setRotationPoint(0.0F, 15.0F, 0.0F);
+        this.body.addBox(-6.0F, -5.0F, -10.0F, 12, 10, 16, 0.0F);
+        this.foot3Left = new ModelRenderer(this, 24, 39);
+        this.foot3Left.setRotationPoint(0.0F, -8.0F, 0.0F);
+        this.foot3Left.addBox(-1.0F, -8.0F, -1.0F, 2, 8, 2, 0.0F);
+        this.assignRotationRotate(foot3Left, 1.0471975511965976F, -0.17453292519943295F, 0.0F);
+        this.leftTalonUpper = new ModelRenderer(this, 24, 26);
+        this.leftTalonUpper.setRotationPoint(0.0F, -10.0F, 1.0F);
+        this.leftTalonUpper.addBox(-1.0F, -4.0F, -1.0F, 2, 4, 2, 0.0F);
+        this.assignRotationRotate(leftTalonUpper, 0.17453292519943295F, 0.0F, 0.0F);
+        this.head = new ModelRenderer(this, 40, 0);
+        this.head.setRotationPoint(0.0F, -2.0F, -8.0F);
+        this.head.addBox(-3.0F, -6.0F, -3.0F, 6, 6, 6, 0.0F);
+        this.assignRotationRotate(head, 0.5235987755982988F, 0.0F, 0.0F);
+        this.upperLeg1Right = new ModelRenderer(this, 0, 39);
+        this.upperLeg1Right.mirror = true;
+        this.upperLeg1Right.setRotationPoint(-5.5F, 2.0F, -7.0F);
+        this.upperLeg1Right.addBox(-1.5F, -8.0F, -1.5F, 3, 8, 3, 0.0F);
+        this.assignRotationRotate(upperLeg1Right, 1.0471975511965976F, 1.0471975511965976F, 0.0F);
+        this.irisRight = new ModelRenderer(this, 0, 0);
+        this.irisRight.mirror = true;
+        this.irisRight.setRotationPoint(-1.5F, -5.5F, 0.0F);
+        this.irisRight.addBox(-0.5F, -4.0F, -0.5F, 1, 4, 1, 0.0F);
+        this.assignRotationRotate(irisRight, -0.5235987755982988F, 0.0F, 0.0F);
+        this.foot2Right = new ModelRenderer(this, 24, 39);
+        this.foot2Right.mirror = true;
+        this.foot2Right.setRotationPoint(0.0F, -8.0F, 0.0F);
+        this.foot2Right.addBox(-1.0F, -8.0F, -1.0F, 2, 8, 2, 0.0F);
+        this.assignRotationRotate(foot2Right, 1.0471975511965976F, 0.17453292519943295F, 0.0F);
+        this.upperLeg3Left = new ModelRenderer(this, 0, 39);
+        this.upperLeg3Left.setRotationPoint(5.5F, 2.0F, -1.0F);
+        this.upperLeg3Left.addBox(-1.5F, -8.0F, -1.5F, 3, 8, 3, 0.0F);
+        this.assignRotationRotate(upperLeg3Left, 1.0471975511965976F, -2.0943951023931953F, 0.0F);
+        this.lowerLeg1Left = new ModelRenderer(this, 12, 39);
+        this.lowerLeg1Left.setRotationPoint(0.0F, -8.0F, 0.0F);
+        this.lowerLeg1Left.addBox(-1.5F, -8.0F, -1.5F, 3, 8, 3, 0.0F);
+        this.assignRotationRotate(lowerLeg1Left, 1.0471975511965976F, -0.17453292519943295F, 0.0F);
+        this.upperLeg2Left = new ModelRenderer(this, 0, 39);
+        this.upperLeg2Left.setRotationPoint(5.5F, 2.0F, -4.0F);
+        this.upperLeg2Left.addBox(-1.5F, -8.0F, -1.5F, 3, 8, 3, 0.0F);
+        this.assignRotationRotate(upperLeg2Left, 1.0471975511965976F, -1.5707963267948966F, 0.0F);
+        this.rightTalonLower = new ModelRenderer(this, 24, 32);
+        this.rightTalonLower.mirror = true;
+        this.rightTalonLower.setRotationPoint(0.0F, -10.0F, -1.0F);
+        this.rightTalonLower.addBox(-0.5F, -4.0F, -1.0F, 1, 4, 2, 0.0F);
+        this.claw1Left = new ModelRenderer(this, 0, 26);
+        this.claw1Left.setRotationPoint(5.0F, 1.0F, -10.0F);
+        this.claw1Left.addBox(-1.5F, -10.0F, -1.5F, 3, 10, 3, 0.0F);
+        this.assignRotationRotate(claw1Left, 1.0471975511965976F, -0.7853981633974483F, 0.0F);
+        this.foot1Left = new ModelRenderer(this, 24, 39);
+        this.foot1Left.setRotationPoint(0.0F, -8.0F, 0.0F);
+        this.foot1Left.addBox(-1.0F, -8.0F, -1.0F, 2, 8, 2, 0.0F);
+        this.assignRotationRotate(foot1Left, 1.0471975511965976F, -0.17453292519943295F, 0.0F);
+        this.foot2Left = new ModelRenderer(this, 24, 39);
+        this.foot2Left.setRotationPoint(0.0F, -8.0F, 0.0F);
+        this.foot2Left.addBox(-1.0F, -8.0F, -1.0F, 2, 8, 2, 0.0F);
+        this.assignRotationRotate(foot2Left, 1.0471975511965976F, -0.17453292519943295F, 0.0F);
+        this.rightTalonUpper = new ModelRenderer(this, 24, 26);
+        this.rightTalonUpper.mirror = true;
+        this.rightTalonUpper.setRotationPoint(0.0F, -10.0F, 1.0F);
+        this.rightTalonUpper.addBox(-1.0F, -4.0F, -1.0F, 2, 4, 2, 0.0F);
+        this.assignRotationRotate(rightTalonUpper, 0.17453292519943295F, 0.0F, 0.0F);
+        this.lowerLeg2Left = new ModelRenderer(this, 12, 39);
+        this.lowerLeg2Left.setRotationPoint(0.0F, -8.0F, 0.0F);
+        this.lowerLeg2Left.addBox(-1.5F, -8.0F, -1.5F, 3, 8, 3, 0.0F);
+        this.assignRotationRotate(lowerLeg2Left, 1.0471975511965976F, -0.17453292519943295F, 0.0F);
+        this.foot1Right = new ModelRenderer(this, 24, 39);
+        this.foot1Right.mirror = true;
+        this.foot1Right.setRotationPoint(0.0F, -8.0F, 0.0F);
+        this.foot1Right.addBox(-1.0F, -8.0F, -1.0F, 2, 8, 2, 0.0F);
+        this.assignRotationRotate(foot1Right, 1.0471975511965976F, 0.17453292519943295F, 0.0F);
+        this.lowerLeg2Right = new ModelRenderer(this, 12, 39);
+        this.lowerLeg2Right.mirror = true;
+        this.lowerLeg2Right.setRotationPoint(0.0F, -8.0F, 0.0F);
+        this.lowerLeg2Right.addBox(-1.5F, -8.0F, -1.5F, 3, 8, 3, 0.0F);
+        this.assignRotationRotate(lowerLeg2Right, 1.0471975511965976F, 0.17453292519943295F, 0.0F);
+        this.upperLeg1Left = new ModelRenderer(this, 0, 39);
+        this.upperLeg1Left.setRotationPoint(5.5F, 2.0F, -7.0F);
+        this.upperLeg1Left.addBox(-1.5F, -8.0F, -1.5F, 3, 8, 3, 0.0F);
+        this.assignRotationRotate(upperLeg1Left, 1.0471975511965976F, -1.0471975511965976F, 0.0F);
+        this.irisLeft = new ModelRenderer(this, 0, 0);
+        this.irisLeft.setRotationPoint(1.5F, -5.5F, 0.0F);
+        this.irisLeft.addBox(-0.5F, -4.0F, -0.5F, 1, 4, 1, 0.0F);
+        this.assignRotationRotate(irisLeft, -0.5235987755982988F, 0.0F, 0.0F);
+        this.lowerLeg3Left = new ModelRenderer(this, 12, 39);
+        this.lowerLeg3Left.setRotationPoint(0.0F, -8.0F, 0.0F);
+        this.lowerLeg3Left.addBox(-1.5F, -8.0F, -1.5F, 3, 8, 3, 0.0F);
+        this.assignRotationRotate(lowerLeg3Left, 1.0471975511965976F, -0.17453292519943295F, 0.0F);
+        this.claw2Right = new ModelRenderer(this, 12, 26);
+        this.claw2Right.mirror = true;
+        this.claw2Right.setRotationPoint(0.0F, -10.0F, 0.0F);
+        this.claw2Right.addBox(-1.5F, -10.0F, -1.5F, 3, 10, 3, 0.0F);
+        this.assignRotationRotate(claw2Right, 1.0471975511965976F, -0.5235987755982988F, 0.5235987755982988F);
+        this.claw2Left = new ModelRenderer(this, 12, 26);
+        this.claw2Left.setRotationPoint(0.0F, -10.0F, 0.0F);
+        this.claw2Left.addBox(-1.5F, -10.0F, -1.5F, 3, 10, 3, 0.0F);
+        this.assignRotationRotate(claw2Left, 1.0471975511965976F, 0.5235987755982988F, -0.5235987755982988F);
+        this.upperLeg3Right = new ModelRenderer(this, 0, 39);
+        this.upperLeg3Right.setRotationPoint(-5.5F, 2.0F, -1.0F);
+        this.upperLeg3Right.addBox(-1.5F, -8.0F, -1.5F, 3, 8, 3, 0.0F);
+        this.assignRotationRotate(upperLeg3Right, 1.0471975511965976F, 2.0943951023931953F, 0.0F);
+        this.foot3Right = new ModelRenderer(this, 24, 39);
+        this.foot3Right.mirror = true;
+        this.foot3Right.setRotationPoint(0.0F, -8.0F, 0.0F);
+        this.foot3Right.addBox(-1.0F, -8.0F, -1.0F, 2, 8, 2, 0.0F);
+        this.assignRotationRotate(foot3Right, 1.0471975511965976F, 0.17453292519943295F, 0.0F);
+        this.skull = new ModelRenderer(this, 60, 0);
+        this.skull.setRotationPoint(0.0F, 0.0F, 0.0F);
+        this.skull.addBox(-8.0F, -16.0F, -8.0F, 16, 16, 16, 0.0F);
+        this.assignRotationRotate(skull, -0.8651597102135892F, 0.0F, 0.0F);
+        this.lowerLeg1Right = new ModelRenderer(this, 12, 39);
+        this.lowerLeg1Right.mirror = true;
+        this.lowerLeg1Right.setRotationPoint(0.0F, -8.0F, 0.0F);
+        this.lowerLeg1Right.addBox(-1.5F, -8.0F, -1.5F, 3, 8, 3, 0.0F);
+        this.assignRotationRotate(lowerLeg1Right, 1.0471975511965976F, 0.17453292519943295F, 0.0F);
+        this.claw1Right = new ModelRenderer(this, 0, 26);
+        this.claw1Right.mirror = true;
+        this.claw1Right.setRotationPoint(-5.0F, 1.0F, -10.0F);
+        this.claw1Right.addBox(-1.5F, -10.0F, -1.5F, 3, 10, 3, 0.0F);
+        this.assignRotationRotate(claw1Right, 1.0471975511965976F, 0.7853981633974483F, 0.0F);
+        this.body.addChild(this.upperLeg2Right);
+        this.claw2Left.addChild(this.leftTalonLower);
+        this.upperLeg3Right.addChild(this.lowerLeg3Right);
+        this.lowerLeg3Left.addChild(this.foot3Left);
+        this.claw2Left.addChild(this.leftTalonUpper);
+        this.body.addChild(this.head);
+        this.body.addChild(this.upperLeg1Right);
+        this.head.addChild(this.irisRight);
+        this.lowerLeg2Right.addChild(this.foot2Right);
+        this.body.addChild(this.upperLeg3Left);
+        this.upperLeg1Left.addChild(this.lowerLeg1Left);
+        this.body.addChild(this.upperLeg2Left);
+        this.claw2Right.addChild(this.rightTalonLower);
+        this.body.addChild(this.claw1Left);
+        this.lowerLeg1Left.addChild(this.foot1Left);
+        this.lowerLeg2Left.addChild(this.foot2Left);
+        this.claw2Right.addChild(this.rightTalonUpper);
+        this.upperLeg2Left.addChild(this.lowerLeg2Left);
+        this.lowerLeg1Right.addChild(this.foot1Right);
+        this.upperLeg2Right.addChild(this.lowerLeg2Right);
+        this.body.addChild(this.upperLeg1Left);
+        this.head.addChild(this.irisLeft);
+        this.upperLeg3Left.addChild(this.lowerLeg3Left);
+        this.claw1Right.addChild(this.claw2Right);
+        this.claw1Left.addChild(this.claw2Left);
+        this.body.addChild(this.upperLeg3Right);
+        this.lowerLeg3Right.addChild(this.foot3Right);
+        this.body.addChild(this.skull);
+        this.upperLeg1Right.addChild(this.lowerLeg1Right);
+        this.body.addChild(this.claw1Right);
+    }
+
+    @Override
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        this.body.render(f5);
+    }
+
+    /**
+     * This is a helper function from Tabula to set the rotation of model parts
+     */
+    public void assignRotationRotate(ModelRenderer modelRenderer, float x, float y, float z) {
+        modelRenderer.rotateAngleX = x;
+        modelRenderer.rotateAngleY = y;
+        modelRenderer.rotateAngleZ = z;
+    }
+}

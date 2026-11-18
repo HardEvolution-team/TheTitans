@@ -1,0 +1,4 @@
+{
+  "parent": "block/crop",
+  "textures": { "crop": "thetitans:blocks/new/pleasant_blade_stage_6" }
+}

@@ -1,0 +1,4 @@
+{
+  "parent": "item/generated",
+  "textures": { "layer0": "thetitans:blocks/new/malgrum_stage_7" }
+}

@@ -1,0 +1,808 @@
+{
+  "funnyexplosion": {
+    "sounds": [
+      "thetitans:titan/funnyexplosion1",
+      "thetitans:titan/funnyexplosion2",
+      "thetitans:titan/funnyexplosion3"
+    ]
+  },
+  "evilgolempunch": {
+    "sounds": [
+      "thetitans:titan/evilgolemhit"
+    ]
+  },
+  "bigzombieliving": {
+    "sounds": [
+      "thetitans:titan/bigzombie1",
+      "thetitans:titan/bigzombie2",
+      "thetitans:titan/bigzombie3",
+      "thetitans:titan/bigzombie4",
+      "thetitans:titan/bigzombie5"
+    ]
+  },
+  "bigzombiegrunt": {
+    "sounds": [
+      "thetitans:titan/bigzombiegrunt1",
+      "thetitans:titan/bigzombiegrunt2"
+    ]
+  },
+  "bigzombiedeath": {
+    "sounds": [
+      "thetitans:titan/bigzombiedeath1",
+      "thetitans:titan/bigzombiedeath2",
+      "thetitans:titan/bigzombiedeath3",
+      "thetitans:titan/bigzombiedeath4",
+      "thetitans:titan/bigzombiedeath5",
+      "thetitans:titan/bigzombiedeath6",
+      "thetitans:titan/bigzombiedeath7"
+    ]
+  },
+  "ghoulliving": {
+    "sounds": [
+      "thetitans:titan/ghoulgrowl1",
+      "thetitans:titan/ghoulgrowl2",
+      "thetitans:titan/ghoulgrowl3",
+      "thetitans:titan/ghoulgrowl4",
+      "thetitans:titan/ghoulgrowl5",
+      "thetitans:titan/ghoulgrowl6"
+    ]
+  },
+  "ghoulgrunt": {
+    "sounds": [
+      "thetitans:titan/ghoulhurt1",
+      "thetitans:titan/ghoulhurt2"
+    ]
+  },
+  "ghouldeath": {
+    "sounds": [
+      "thetitans:titan/ghouldeath"
+    ]
+  },
+  "wightliving": {
+    "sounds": [
+      "thetitans:titan/wight1",
+      "thetitans:titan/wight2",
+      "thetitans:titan/wight3"
+    ]
+  },
+  "wightgrunt": {
+    "sounds": [
+      "thetitans:titan/wighthurt1",
+      "thetitans:titan/wighthurt2"
+    ]
+  },
+  "wightdeath": {
+    "sounds": [
+      "thetitans:titan/wightdeath"
+    ]
+  },
+  "ratsay": {
+    "sounds": [
+      "thetitans:titan/ratsay1",
+      "thetitans:titan/ratsay2",
+      "thetitans:titan/ratsay3"
+    ]
+  },
+  "ratgiantsay": {
+    "sounds": [
+      "thetitans:titan/ratgiant1",
+      "thetitans:titan/ratgiant2",
+      "thetitans:titan/ratgiant3"
+    ]
+  },
+  "rathit": {
+    "sounds": [
+      "thetitans:titan/rathit1",
+      "thetitans:titan/rathit2",
+      "thetitans:titan/rathit3"
+    ]
+  },
+  "ratgianthit": {
+    "sounds": [
+      "thetitans:titan/ratgianthit1",
+      "thetitans:titan/ratgianthit2",
+      "thetitans:titan/ratgianthit3"
+    ]
+  },
+  "ratdeath": {
+    "sounds": [
+      "thetitans:titan/ratdeath"
+    ]
+  },
+  "warlockidle": {
+    "sounds": [
+      "thetitans:titan/warlockidle"
+    ]
+  },
+  "warlockhurt": {
+    "sounds": [
+      "thetitans:titan/warlockhit"
+    ]
+  },
+  "wraithhurt": {
+    "sounds": [
+      "thetitans:titan/wraithhit"
+    ]
+  },
+  "wraithdeath": {
+    "sounds": [
+      "thetitans:titan/wraithdeath"
+    ]
+  },
+  "cast": {
+    "sounds": [
+      "thetitans:titan/cast1",
+      "thetitans:titan/cast2"
+    ]
+  },
+  "castattack": {
+    "sounds": [
+      "thetitans:titan/castAttackSpell1",
+      "thetitans:titan/castAttackSpell2"
+    ]
+  },
+  "castpassive": {
+    "sounds": [
+      "thetitans:titan/castPassiveSpell"
+    ]
+  },
+  "gargoyleliving": {
+    "sounds": [
+      "thetitans:titan/gargoyleliving1",
+      "thetitans:titan/gargoyleliving2",
+      "thetitans:titan/gargoyleliving3"
+    ]
+  },
+  "gargoylegrunt": {
+    "sounds": [
+      "thetitans:titan/gargoylegrunt1",
+      "thetitans:titan/gargoylegrunt2",
+      "thetitans:titan/gargoylegrunt3",
+      "thetitans:titan/gargoylegrunt4"
+    ]
+  },
+  "gargoyledeath": {
+    "sounds": [
+      "thetitans:titan/gargoyledeath"
+    ]
+  },
+  "titancrushwood": {
+    "sounds": [
+      "thetitans:titan/titancrushwood"
+    ]
+  },
+  "titanhitmetal": {
+    "sounds": [
+      "thetitans:titan/titanhitmetal"
+    ]
+  },
+  "titanpress": {
+    "sounds": [
+      "thetitans:titan/titanpress1",
+      "thetitans:titan/titanpress2",
+      "thetitans:titan/titanpress3"
+    ]
+  },
+  "sworddrag": {
+    "sounds": [
+      "thetitans:titan/sworddrag"
+    ]
+  },
+  "titanswing": {
+    "sounds": [
+      "thetitans:titan/titanswing"
+    ]
+  },
+  "slashflesh": {
+    "sounds": [
+      "thetitans:titan/slashflesh"
+    ]
+  },
+  "dimensionaltransport": {
+    "sounds": [
+      "thetitans:titan/dimensionaltransport"
+    ]
+  },
+  "harcadiumhum": {
+    "sounds": [
+      "thetitans:titan/harcadiumhum"
+    ]
+  },
+  "harcadiumblockhum": {
+    "sounds": [
+      "thetitans:titan/harcadiumblockhum"
+    ]
+  },
+  "largefall": {
+    "sounds": [
+      "thetitans:titan/largefall"
+    ]
+  },
+  "quickapperence": {
+    "sounds": [
+      "thetitans:titan/quickapperence"
+    ]
+  },
+  "titanbirth": {
+    "sounds": [
+      "thetitans:titan/titancreation"
+    ]
+  },
+  "titanquake": {
+    "sounds": [
+      "thetitans:titan/titanquake"
+    ]
+  },
+  "titanrumble": {
+    "sounds": [
+      "thetitans:titan/titanrumble"
+    ]
+  },
+  "distantlargefall": {
+    "sounds": [
+      "thetitans:titan/distantlargefall"
+    ]
+  },
+  "titanfall": {
+    "sounds": [
+      "thetitans:titan/titanfall"
+    ]
+  },
+  "titanslam": {
+    "sounds": [
+      "thetitans:titan/titanslam"
+    ]
+  },
+  "titanstrike": {
+    "sounds": [
+      "thetitans:titan/titanstrike"
+    ]
+  },
+  "groundsmash": {
+    "sounds": [
+      "thetitans:titan/groundsmash"
+    ]
+  },
+  "omg": {
+    "sounds": [
+      "thetitans:titan/challengegamessound"
+    ]
+  },
+  "chaffdeployment": {
+    "sounds": [
+      "thetitans:titan/chaffuse"
+    ]
+  },
+  "titanpunch": {
+    "sounds": [
+      "thetitans:titan/titanpunch1",
+      "thetitans:titan/titanpunch2"
+    ]
+  },
+  "titanland": {
+    "sounds": [
+      "thetitans:titan/titanland"
+    ]
+  },
+  "turretshoot": {
+    "sounds": [
+      "thetitans:titan/turretshoot"
+    ]
+  },
+  "turretdeath": {
+    "sounds": [
+      "thetitans:titan/turretdestruction"
+    ]
+  },
+  "turretshoot2": {
+    "sounds": [
+      "thetitans:titan/turretgroundshoot"
+    ]
+  },
+  "turretdeath2": {
+    "sounds": [
+      "thetitans:titan/turretgrounddestruction"
+    ]
+  },
+  "mortarshoot": {
+    "sounds": [
+      "thetitans:titan/mortarshot"
+    ]
+  },
+  "mortarhit": {
+    "sounds": [
+      "thetitans:titan/mortarhit"
+    ]
+  },
+  "turretdeath3": {
+    "sounds": [
+      "thetitans:titan/turretmortardestruction"
+    ]
+  },
+  "titansummonminion": {
+    "sounds": [
+      "thetitans:titan/summonminion"
+    ]
+  },
+  "predatorspider": {
+    "sounds": [
+      "thetitans:titan/predatorspider"
+    ]
+  },
+  "lightningthrow": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/lightningthrow",
+        "stream": true
+      }
+    ]
+  },
+  "lightningcharge": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/lightningcharge",
+        "stream": true
+      }
+    ]
+  },
+  "titanzombieliving": {
+    "sounds": [
+      "thetitans:titan/zombie/zombietitanexist1",
+      "thetitans:titan/zombie/zombietitanexist2",
+      "thetitans:titan/zombie/zombietitanexist3",
+      "thetitans:titan/zombie/zombietitanexist4",
+      "thetitans:titan/zombie/zombietitanexist5",
+      "thetitans:titan/zombie/zombietitanexist6",
+      "thetitans:titan/zombie/zombietitanexist7",
+      "thetitans:titan/zombie/zombietitanexist8",
+      "thetitans:titan/zombie/zombietitanexist9",
+      "thetitans:titan/zombie/zombietitanexist10"
+    ]
+  },
+  "titanzombiegrunt": {
+    "sounds": [
+      "thetitans:titan/zombie/zombietitangrunt1",
+      "thetitans:titan/zombie/zombietitangrunt2",
+      "thetitans:titan/zombie/zombietitangrunt3",
+      "thetitans:titan/zombie/zombietitangrunt4",
+      "thetitans:titan/zombie/zombietitangrunt5",
+      "thetitans:titan/zombie/zombietitangrunt6",
+      "thetitans:titan/zombie/zombietitangrunt7",
+      "thetitans:titan/zombie/zombietitangrunt8",
+      "thetitans:titan/zombie/zombietitangrunt9",
+      "thetitans:titan/zombie/zombietitangrunt10",
+      "thetitans:titan/zombie/zombietitangrunt11",
+      "thetitans:titan/zombie/zombietitangrunt12"
+    ]
+  },
+  "titanstep": {
+    "sounds": [
+      "thetitans:titan/titanstep1",
+      "thetitans:titan/titanstep2"
+    ]
+  },
+  "titanzombieroar": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/zombie/zombietitanroar",
+        "stream": true
+      }
+    ]
+  },
+  "titanzombiedeath": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/zombie/zombietitandeath",
+        "stream": true
+      }
+    ]
+  },
+  "titanzombiecreation": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/zombie/zombietitancreation",
+        "stream": true
+      }
+    ]
+  },
+  "titanspiderliving": {
+    "sounds": [
+      "thetitans:titan/spider/giantspiderliving1",
+      "thetitans:titan/spider/giantspiderliving2",
+      "thetitans:titan/spider/giantspiderliving3",
+      "thetitans:titan/spider/giantspiderliving4"
+    ]
+  },
+  "titanspidergrunt": {
+    "sounds": [
+      "thetitans:titan/spider/giantspidergrunt1",
+      "thetitans:titan/spider/giantspidergrunt2",
+      "thetitans:titan/spider/giantspidergrunt3",
+      "thetitans:titan/spider/giantspidergrunt4"
+    ]
+  },
+  "titanspiderdeath": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/spider/giantspiderdeath",
+        "stream": true
+      }
+    ]
+  },
+  "titancreeperliving": {
+    "sounds": [
+      "thetitans:titan/creeper/giantcreeperliving1",
+      "thetitans:titan/creeper/giantcreeperliving2",
+      "thetitans:titan/creeper/giantcreeperliving3",
+      "thetitans:titan/creeper/giantcreeperliving4"
+    ]
+  },
+  "titancreepergrunt": {
+    "sounds": [
+      "thetitans:titan/creeper/giantcreeperhurt1",
+      "thetitans:titan/creeper/giantcreeperhurt2",
+      "thetitans:titan/creeper/giantcreeperhurt3",
+      "thetitans:titan/creeper/giantcreeperhurt4"
+    ]
+  },
+  "titancreeperdeath": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/creeper/giantcreeperdeath",
+        "stream": true
+      }
+    ]
+  },
+  "titancreeperstun": {
+    "sounds": [
+      "thetitans:titan/creeper/giantcreeperstunned"
+    ]
+  },
+  "titancreeperwarning": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/creeper/creepertitanwarning",
+        "stream": true
+      }
+    ]
+  },
+  "titancreeperexplosion": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/creeper/creepertitanexplosion",
+        "stream": true
+      }
+    ]
+  },
+  "titancreeperawaken": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/creeper/creepertitanawaken",
+        "stream": true
+      }
+    ]
+  },
+  "titancreeperbeginmove": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/creeper/creepertitangetup",
+        "stream": true
+      }
+    ]
+  },
+  "titanghastfireball": {
+    "sounds": [
+      "thetitans:titan/ghast/ghasttitanfireball"
+    ]
+  },
+  "titanghastcharge": {
+    "sounds": [
+      "thetitans:titan/ghast/ghasttitancharge"
+    ]
+  },
+  "titanghastliving": {
+    "sounds": [
+      "thetitans:titan/ghast/ghasttitanmoan1",
+      "thetitans:titan/ghast/ghasttitanmoan2",
+      "thetitans:titan/ghast/ghasttitanmoan3",
+      "thetitans:titan/ghast/ghasttitanmoan4",
+      "thetitans:titan/ghast/ghasttitanmoan5",
+      "thetitans:titan/ghast/ghasttitanmoan6",
+      "thetitans:titan/ghast/ghasttitanmoan7"
+    ]
+  },
+  "titanghastgrunt": {
+    "sounds": [
+      "thetitans:titan/ghast/ghasttitanscream1",
+      "thetitans:titan/ghast/ghasttitanscream2",
+      "thetitans:titan/ghast/ghasttitanscream3",
+      "thetitans:titan/ghast/ghasttitanscream4",
+      "thetitans:titan/ghast/ghasttitanscream5"
+    ]
+  },
+  "titanghastdeath": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/ghast/ghasttitandeath",
+        "stream": true
+      }
+    ]
+  },
+  "titanendercolossusscream": {
+    "sounds": [
+      "thetitans:titan/endercolossus/endercolossusscream1",
+      "thetitans:titan/endercolossus/endercolossusscream2",
+      "thetitans:titan/endercolossus/endercolossusscream3",
+      "thetitans:titan/endercolossus/endercolossusscream4"
+    ]
+  },
+  "titanendercolossusscreamlong": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/endercolossus/endercolossusscreamlong",
+        "stream": true
+      }
+    ]
+  },
+  "titanendercolossuschomp": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/endercolossus/endercolossuschomp",
+        "stream": true
+      }
+    ]
+  },
+  "titanendercolossusstare": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/endercolossus/endercolossusstare",
+        "stream": true
+      }
+    ]
+  },
+  "titanendercolossusroar": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/endercolossus/endercolossusroar",
+        "stream": true
+      }
+    ]
+  },
+  "titanendercolossusliving": {
+    "sounds": [
+      "thetitans:titan/endercolossus/endercolossusliving1",
+      "thetitans:titan/endercolossus/endercolossusliving2"
+    ]
+  },
+  "titanendercolossusgrunt": {
+    "sounds": [
+      "thetitans:titan/endercolossus/endercolossusgrunt1",
+      "thetitans:titan/endercolossus/endercolossusgrunt2",
+      "thetitans:titan/endercolossus/endercolossusgrunt3",
+      "thetitans:titan/endercolossus/endercolossusgrunt4"
+    ]
+  },
+  "titanendercolossusdeath": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/endercolossus/endercolossusdeath",
+        "stream": true
+      }
+    ]
+  },
+  "titanpigzombieliving": {
+    "sounds": [
+      "thetitans:titan/pigzombie/giantzombiepigman1",
+      "thetitans:titan/pigzombie/giantzombiepigman2",
+      "thetitans:titan/pigzombie/giantzombiepigman3",
+      "thetitans:titan/pigzombie/giantzombiepigman4",
+      "thetitans:titan/zombie/zombietitanexist5",
+      "thetitans:titan/zombie/zombietitanexist6"
+    ]
+  },
+  "titanpigzombiegrunt": {
+    "sounds": [
+      "thetitans:titan/pigzombie/giantzombiepigmangrunt1",
+      "thetitans:titan/pigzombie/giantzombiepigmangrunt2",
+      "thetitans:titan/zombie/zombietitangrunt1",
+      "thetitans:titan/zombie/zombietitangrunt2"
+    ]
+  },
+  "titanpigzombiedeath": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/pigzombie/giantzombiepigmandeath",
+        "stream": true
+      }
+    ]
+  },
+  "titanblazebreathe": {
+    "sounds": [
+      "thetitans:titan/blaze/blazetitanbreathe1",
+      "thetitans:titan/blaze/blazetitanbreathe2",
+      "thetitans:titan/blaze/blazetitanbreathe3",
+      "thetitans:titan/blaze/blazetitanbreathe4"
+    ]
+  },
+  "titanblazegrunt": {
+    "sounds": [
+      "thetitans:titan/blaze/blazetitangrunt1",
+      "thetitans:titan/blaze/blazetitangrunt2",
+      "thetitans:titan/blaze/blazetitangrunt3",
+      "thetitans:titan/blaze/blazetitangrunt4"
+    ]
+  },
+  "titanblazedeath": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/blaze/blazetitandeath",
+        "stream": true
+      }
+    ]
+  },
+  "titansilverfishliving": {
+    "sounds": [
+      "thetitans:titan/silverfish/squeak1",
+      "thetitans:titan/silverfish/squeak2",
+      "thetitans:titan/silverfish/squeak3",
+      "thetitans:titan/silverfish/squeak4"
+    ]
+  },
+  "titansilverfishgrunt": {
+    "sounds": [
+      "thetitans:titan/silverfish/hitsqueak1",
+      "thetitans:titan/silverfish/hitsqueak2",
+      "thetitans:titan/silverfish/hitsqueak3"
+    ]
+  },
+  "titansilverfishdeath": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/silverfish/deathsqueak",
+        "stream": true
+      }
+    ]
+  },
+  "titanskeletonliving": {
+    "sounds": [
+      "thetitans:titan/skeleton/giantskeleton1",
+      "thetitans:titan/skeleton/giantskeleton2",
+      "thetitans:titan/skeleton/giantskeleton3"
+    ]
+  },
+  "titanskeletongrunt": {
+    "sounds": [
+      "thetitans:titan/skeleton/giantskeletonhurt1",
+      "thetitans:titan/skeleton/giantskeletonhurt2",
+      "thetitans:titan/skeleton/giantskeletonhurt3",
+      "thetitans:titan/skeleton/giantskeletonhurt4"
+    ]
+  },
+  "titanskeletondeath": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/skeleton/giantskeletondeath",
+        "stream": true
+      }
+    ]
+  },
+  "titanwitherskeletonliving": {
+    "sounds": [
+      "thetitans:titan/skeleton/giantwitherskeleton1",
+      "thetitans:titan/skeleton/giantwitherskeleton2",
+      "thetitans:titan/skeleton/giantwitherskeleton3"
+    ]
+  },
+  "titanwitherskeletongrunt": {
+    "sounds": [
+      "thetitans:titan/skeleton/giantwitherskeletonhurt1",
+      "thetitans:titan/skeleton/giantwitherskeletonhurt2",
+      "thetitans:titan/skeleton/giantwitherskeletonhurt3",
+      "thetitans:titan/skeleton/giantwitherskeletonhurt4"
+    ]
+  },
+  "titanwitherskeletondeath": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/skeleton/giantwitherskeletondeath",
+        "stream": true
+      }
+    ]
+  },
+  "titanskeletonawaken": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/skeleton/skeletontitanawaken",
+        "stream": true
+      }
+    ]
+  },
+  "titanskeletonbeginmove": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/skeleton/skeletontitanbeginmove",
+        "stream": true
+      }
+    ]
+  },
+  "titanskeletongetup": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/skeleton/skeletontitangetup",
+        "stream": true
+      }
+    ]
+  },
+  "titanskeletonbonecrunch": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/skeleton/skeletontitanbonecrunch",
+        "stream": true
+      }
+    ]
+  },
+  "witherzillaspawn": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/wither/witherzillaspawn",
+        "stream": true
+      }
+    ]
+  },
+  "witherzillaliving": {
+    "sounds": [
+      "thetitans:titan/wither/witherzillaliving5",
+      "thetitans:titan/wither/witherzillaliving6",
+      "thetitans:titan/wither/witherzillaliving7",
+      "thetitans:titan/wither/witherzillaliving8"
+    ]
+  },
+  "witherzillagrunt": {
+    "sounds": [
+      "thetitans:titan/wither/witherzillahurt1",
+      "thetitans:titan/wither/witherzillahurt2",
+      "thetitans:titan/wither/witherzillahurt3",
+      "thetitans:titan/wither/witherzillahurt4"
+    ]
+  },
+  "witherzilladeath": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/wither/witherzilladeath",
+        "stream": true
+      }
+    ]
+  },
+  "executordragonliving": {
+    "sounds": [
+      "thetitans:titan/enderdragon/dragongrowl1",
+      "thetitans:titan/enderdragon/dragongrowl2",
+      "thetitans:titan/enderdragon/dragongrowl3",
+      "thetitans:titan/enderdragon/dragongrowl4"
+    ]
+  },
+  "executordragongrunt": {
+    "sounds": [
+      "thetitans:titan/enderdragon/dragongrunt1",
+      "thetitans:titan/enderdragon/dragongrunt2",
+      "thetitans:titan/enderdragon/dragongrunt3",
+      "thetitans:titan/enderdragon/dragongrunt4"
+    ]
+  },
+  "executordragondeath": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/enderdragon/dragondeath",
+        "stream": true
+      }
+    ]
+  },
+  "executordragonflap": {
+    "sounds": [
+      {
+        "name": "thetitans:titan/enderdragon/dragonflap",
+        "stream": true
+      }
+    ]
+  }
+}

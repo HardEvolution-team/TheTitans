@@ -1,0 +1,4 @@
+{
+  "parent": "thetitans:block/perch_egg",
+  "textures": { "all": "minecraft:blocks/obsidian" }
+}

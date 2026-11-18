@@ -1,0 +1,20 @@
+# Strings added by the port. Everything else comes from the original jar (archaic_originals).
+item.withrenium.name=煌炎结晶
+item.withrenium_helmet.name=煌炎头盔
+item.withrenium_chestplate.name=煌炎胸甲
+item.withrenium_leggings.name=煌炎护腿
+item.withrenium_boots.name=煌炎靴子
+item.withrenium_pickaxe.name=煌炎镐
+item.withrenium_axe.name=煌炎斧
+item.withrenium_spade.name=煌炎锹
+item.withrenium_hoe.name=煌炎锄
+item.withrenium_sword.name=煌炎剑
+item.nickel_ingot.name=古镁锭
+tile.withrenium_ore.name=煌炎矿石
+tile.withrenium_block.name=煌炎块
+tile.nickel_ore.name=古铬矿石
+tile.nickel_block.name=古铬块
+achievement.withrenium=盛开的地狱之花
+achievement.withrenium.desc=得到煌炎结晶。
+achievement.withreniumArmor=与凋零之火共舞
+achievement.withreniumArmor.desc=穿上整套的煌炎护甲。

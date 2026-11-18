@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:gold_block"
+    },
+    "title": {
+      "translate": "achievement.evilgolem3"
+    },
+    "description": {
+      "translate": "achievement.evilgolem3.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "thetitans:goldguard",
+  "criteria": {
+    "granted": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

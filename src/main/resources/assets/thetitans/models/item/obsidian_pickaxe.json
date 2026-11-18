@@ -1,0 +1,7 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "thetitans:items/new/custom_pickaxe_head",
+    "layer1": "thetitans:items/new/custom_pickaxe_handle"
+  }
+}

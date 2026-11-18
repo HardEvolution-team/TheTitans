@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:skull",
+      "data": 2
+    },
+    "title": {
+      "translate": "achievement.evilgolem1"
+    },
+    "description": {
+      "translate": "achievement.evilgolem1.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "thetitans:zombie",
+  "criteria": {
+    "granted": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

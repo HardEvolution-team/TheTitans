@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "thetitans:titanium_chestplate"
+    },
+    "title": {
+      "translate": "achievement.fullarmor"
+    },
+    "description": {
+      "translate": "achievement.fullarmor.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "thetitans:diamondarmor",
+  "criteria": {
+    "granted": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
