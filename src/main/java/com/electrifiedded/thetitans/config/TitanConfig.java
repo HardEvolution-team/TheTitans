@@ -19,6 +19,7 @@ public class TitanConfig {
     public static int textures;
     public static int texturesBar;
     public static boolean antiCheatIs;
+    public static boolean dormantFastTick = true;
     public static boolean coreModdingIs;
     //Configurations
     public static int difficulty;
@@ -61,7 +62,8 @@ public class TitanConfig {
             TheTitans.reloadTextures(); texturesFormer = textures;
         }
 
-        antiCheatIs = TheTitans.config.get("general", "Enable Anti Cheat", true, TheTitans.translate("config", "boolean.anticheat")).getBoolean();
+dormantFastTick = TheTitans.config.get("general", "Dormant Titans Fast Tick", true, "Dormant titans standing on the ground run their full tick only once per 10 ticks (big TPS saving).").getBoolean();
+                antiCheatIs = TheTitans.config.get("general", "Enable Anti Cheat", true, TheTitans.translate("config", "boolean.anticheat")).getBoolean();
         mobsUnited = TheTitans.config.get("general", "Enable The United Realms of Minecraftia", false, TheTitans.translate("config", "boolean.urm")).getBoolean();
         progressionEnable = TheTitans.config.get("general", "Enable Progression Multiplier", true, TheTitans.translate("config", "boolean.progressionmulti")).getBoolean();
         coreModdingIs = TheTitans.config.get("general", "Enable Core Modding", true, TheTitans.translate("config", "boolean.coremodding")).setRequiresMcRestart(true).getBoolean();

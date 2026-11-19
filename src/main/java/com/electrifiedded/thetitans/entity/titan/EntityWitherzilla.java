@@ -262,8 +262,13 @@ public final class EntityWitherzilla extends EntityTitan implements IRangedAttac
                 int i1 = i + MathHelper.getInt(rand, 10, 100) * MathHelper.getInt(rand, -1, 1);
                 int j1 = j + MathHelper.getInt(rand, 10, 100) * MathHelper.getInt(rand, -1, 1);
                 int k1 = k + MathHelper.getInt(rand, 10, 100) * MathHelper.getInt(rand, -1, 1);
+                // PERF — cheap rolls first; the old order built a lightning entity 20x every other tick and could
+                // load/generate chunks up to 100 blocks away through isSideSolid.
+                BlockPos below = new BlockPos(i1, j1 - 1, k1);
+                if (rand.nextInt(5) != 0 || !world.isBlockLoaded(below) || !world.isSideSolid(below, net.minecraft.util.EnumFacing.UP))
+                    continue;
                 EntityUrLightning entitylightning = new EntityUrLightning(world, i1, j1, k1);
-                if (rand.nextInt(5) == 0 && (world.isSideSolid(new BlockPos(i1, j1 - 1, k1), net.minecraft.util.EnumFacing.UP)) && (world.checkNoEntityCollision(entitylightning.getEntityBoundingBox())) && (world.getCollisionBoxes(entitylightning, entitylightning.getEntityBoundingBox()).isEmpty()) && (!world.containsAnyLiquid(entitylightning.getEntityBoundingBox())))
+                if ((world.checkNoEntityCollision(entitylightning.getEntityBoundingBox())) && (world.getCollisionBoxes(entitylightning, entitylightning.getEntityBoundingBox()).isEmpty()) && (!world.containsAnyLiquid(entitylightning.getEntityBoundingBox())))
                     world.addWeatherEffect(entitylightning);
             }
         }

@@ -382,6 +382,7 @@ public class TheTitans {
         event.registerServerCommand(new CommandEvent());
         event.registerServerCommand(new CommandClearMinions());
         event.registerServerCommand(new CommandDebug());
+        event.registerServerCommand(new com.electrifiedded.thetitans.command.CommandTitanBench());
     }
 
     @Mod.EventHandler

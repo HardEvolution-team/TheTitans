@@ -1,5 +1,7 @@
 package com.electrifiedded.thetitans.entity.titan;
 
+import com.electrifiedded.thetitans.util.perf.TitanProfiler;
+
 import com.electrifiedded.thehippomaster.AnimationAPI.AIAnimation;
 import com.electrifiedded.thehippomaster.AnimationAPI.AnimationAPI;
 import com.electrifiedded.thehippomaster.AnimationAPI.IAnimatedEntity;
@@ -187,6 +189,37 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
     }
 
     public void onUpdate() {
+        long perfT0 = TitanProfiler.start();
+        try {
+            if (dormantStatueTick())
+                return;
+            onUpdateTitan();
+        } finally {
+            TitanProfiler.stop(getClass(), TitanProfiler.Sec.TOTAL, perfT0);
+        }
+    }
+
+    /**
+     * PERF — a dormant titan standing still on the ground is a statue: nothing in its tick can change except the
+     * awakening check, which allowAwaken() only runs when (ticksExisted + id) % 10 == 0. So the full tick (AI, body
+     * part queries, move, collision, boss bar) runs on exactly those ticks and the other 9 of 10 are skipped.
+     * Anything that disturbs it (damage, rider, target, airborne, motion) drops it back to the full tick.
+     */
+    private boolean dormantStatueTick() {
+        if (!TitanConfig.dormantFastTick || !fetchWaiting() || !onGround || isDead || getHealth() <= 0F || hurtTime > 0
+            || deathTime > 0 || getInvulTime() > 0 || getAttackTarget() != null || isRiding() || isBeingRidden()
+            || motionY > 0D || (ticksExisted + getEntityId()) % 10 == 0 || ticksExisted < 20)
+            return false;
+        prevPosX = posX; prevPosY = posY; prevPosZ = posZ;
+        prevRotationYaw = rotationYaw; prevRotationPitch = rotationPitch;
+        prevRotationYawHead = rotationYawHead; prevRenderYawOffset = renderYawOffset;
+        motionX = 0D; motionZ = 0D;
+        if (hurtResistantTime > 0)
+            --hurtResistantTime;
+        return true;
+    }
+
+    private void onUpdateTitan() {
         world.profiler.startSection("onTitanUpdateLiving");
         super.onUpdate();
 
@@ -256,8 +289,12 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
     }
 
     public void onLivingUpdate() {
+        long perfT = TitanProfiler.start();
         whenUpdateAnimation();
+        TitanProfiler.stop(getClass(), TitanProfiler.Sec.ANIM, perfT);
+        perfT = TitanProfiler.start();
         whenUpdateBounds();
+        TitanProfiler.stop(getClass(), TitanProfiler.Sec.BOUNDS, perfT);
         whenUpdateMinion();
 
         if (stunnedIs)
@@ -508,11 +545,13 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
     @Override
     public void move(net.minecraft.entity.MoverType type, double x, double y, double z) {
         boolean remote = world.isRemote;
+        long perfT = TitanProfiler.start();
         TitanPhysics.moveEnter(remote);
         try {
             super.move(type, x, y, z);
         } finally {
             TitanPhysics.moveExit(remote);
+            TitanProfiler.stop(getClass(), TitanProfiler.Sec.MOVE, perfT);
         }
     }
 
@@ -613,28 +652,73 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
         }
     }
 
+    // PERF — used to run 2-3 world entity queries PER BODY PART per tick (projectiles, push, crush) — up to ~25
+    // chunk-section scans for a 10-part titan. Now one query over the union of all hitboxes, then each consumer
+    // filters that list by its own box (same intersect test the world query used).
     protected void whenUpdateBounds() {
-        if (isEntityAlive() && ticksExisted > 5) {
-            collideProjectilesWith(getEntityBoundingBox());
-            whenMobCrushing(getEntityBoundingBox());
+        if (!isEntityAlive() || ticksExisted <= 5)
+            return;
+        AxisAlignedBB body = getEntityBoundingBox();
+        AxisAlignedBB union = body.grow(0.5D);
+        for (EntityTitanPart part : setPiece)
+            union = union.union(part.getEntityBoundingBox().grow(1.0D, 0.5D, 1.0D));
+        List<Entity> near = world.getEntitiesWithinAABBExcludingEntity(this, union);
+        boolean waiting = fetchWaiting();
+        collideProjectilesWith(body, near);
+        whenMobCrushing(body, near);
 
-            for(EntityTitanPart part : setPiece) {
-                collideProjectilesWith(part.getEntityBoundingBox());
-                collideWithEntities(part, world.getEntitiesWithinAABBExcludingEntity(this, part.getEntityBoundingBox().expand(1.0D, 0.0D, 1.0D)));
+        for (EntityTitanPart part : setPiece) {
+            AxisAlignedBB pb = part.getEntityBoundingBox();
+            collideProjectilesWith(pb, near);
+            if (!waiting)
+                collideWithEntities(part, within(near, pb.expand(1.0D, 0.0D, 1.0D)));
 
-                if (ticksExisted % 10 == 0 && motionX != 0 && motionY != 0 && motionZ != 0)
-                    destroyBlocksInAABB(part.getEntityBoundingBox());
+            if (ticksExisted % 10 == 0 && motionX != 0 && motionY != 0 && motionZ != 0)
+                destroyBlocksInAABB(pb);
 
-                if (part.needsCrush())
-                    whenMobCrushing(part.getEntityBoundingBox());
-            }
+            if (part.needsCrush())
+                whenMobCrushing(pb, near);
         }
+    }
+
+    private static List<Entity> within(List<Entity> src, AxisAlignedBB box) {
+        if (src.isEmpty())
+            return java.util.Collections.emptyList();
+        List<Entity> out = new ArrayList<>();
+        for (int i = 0; i < src.size(); i++) {
+            Entity e = src.get(i);
+            if (e.getEntityBoundingBox().intersects(box))
+                out.add(e);
+        }
+        return out;
+    }
+
+    protected void whenMobCrushing(AxisAlignedBB boundingBox, List<Entity> near) {
+        for (int i = 0; i < near.size(); i++) {
+            Entity entity = near.get(i);
+            if ((entity instanceof EntityLivingBase) && entity.onGround && !(entity instanceof EntityTitan) && entity.getEntityBoundingBox().intersects(boundingBox))
+                entity.attackEntityFrom(DamageSourceExtra.causeHarmSquishing(this), (float)fetchAmountStrike(1.0F));
+        }
+    }
+
+    public void collideProjectilesWith(AxisAlignedBB hitbox, List<Entity> near) {
+        if (hurtResistantTime < 1 && !near.isEmpty())
+            collideProjectilesWithList(within(near, hitbox.expand(0.5D, 0.5D, 0.5D)));
     }
 
     protected void whenUpdateAnimation() {
     }
 
     protected void updateAITasks() {
+        long perfT = TitanProfiler.start();
+        try {
+            updateAITasksTitan();
+        } finally {
+            TitanProfiler.stop(getClass(), TitanProfiler.Sec.AI, perfT);
+        }
+    }
+
+    private void updateAITasksTitan() {
         List<?> list = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox());
         if (list != null && !list.isEmpty())
             for (int i1 = 0; i1 < list.size(); i1++)
@@ -1082,6 +1166,7 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
         final boolean tileDrops = world.getGameRules().getBoolean("doTileDrops");
         final Boolean[] playerNear = new Boolean[1];
         TitanPhysics.forCubeEach(world, arg70972n1, (pos, state) -> smashCube(pos, state, tileDrops, 5, playerNear));
+        flushSmashDrops(arg70972n1);
     }
 
     public void wreckInAABBToplessBlocks(AxisAlignedBB arg70972n1) {
@@ -1093,6 +1178,7 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
             if (state.isOpaqueCube() && !world.getBlockState(pos.up()).isOpaqueCube())
                 smashCube(pos, state, tileDrops, 3, playerNear);
         });
+        flushSmashDrops(arg70972n1);
     }
 
     /**Shared body of the destroy loops: removes one block, sometimes flinging it as a burning falling block.*/
@@ -1121,13 +1207,46 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
         else {
             if (playerNear[0] == null)
                 playerNear[0] = world.getClosestPlayerToEntity(this, 16D) != null;
+            // PERF — drops are pooled per smash call and spawned as merged stacks (flushSmashDrops): same loot,
+            // but one item entity per stack instead of one per block (thousands of EntityItem in the bench).
             if (playerNear[0])
-                world.destroyBlock(pos, true);
-            else {
-                world.setBlockToAir(pos);
-                block.dropBlockAsItem(world, pos, state, 0);
-            }
+                world.playEvent(2001, pos, Block.getStateId(state));
+            net.minecraft.util.NonNullList<net.minecraft.item.ItemStack> drops = net.minecraft.util.NonNullList.create();
+            block.getDrops(drops, world, pos, state, 0);
+            float chance = net.minecraftforge.event.ForgeEventFactory.fireBlockHarvesting(drops, world, pos, state, 0, 1.0F, false, null);
+            world.setBlockToAir(pos);
+            for (net.minecraft.item.ItemStack st : drops)
+                if (!st.isEmpty() && world.rand.nextFloat() <= chance)
+                    poolSmashDrop(st);
         }
+    }
+
+    private final List<net.minecraft.item.ItemStack> smashDrops = new ArrayList<>();
+
+    private void poolSmashDrop(net.minecraft.item.ItemStack st) {
+        for (net.minecraft.item.ItemStack have : smashDrops)
+            if (have.getCount() < have.getMaxStackSize() && net.minecraft.item.ItemStack.areItemsEqual(have, st) && net.minecraft.item.ItemStack.areItemStackTagsEqual(have, st)) {
+                int move = Math.min(st.getCount(), have.getMaxStackSize() - have.getCount());
+                have.grow(move);
+                st.shrink(move);
+                if (st.isEmpty())
+                    return;
+            }
+        smashDrops.add(st.copy());
+    }
+
+    private void flushSmashDrops(AxisAlignedBB box) {
+        if (smashDrops.isEmpty())
+            return;
+        for (net.minecraft.item.ItemStack st : smashDrops) {
+            double x = box.minX + rand.nextDouble() * (box.maxX - box.minX);
+            double z = box.minZ + rand.nextDouble() * (box.maxZ - box.minZ);
+            double y = Math.max(box.minY, 0D) + 0.5D;
+            net.minecraft.entity.item.EntityItem item = new net.minecraft.entity.item.EntityItem(world, x, y, z, st);
+            item.setDefaultPickupDelay();
+            world.spawnEntity(item);
+        }
+        smashDrops.clear();
     }
 
     public void fall(float arg70069n1, float damageMultiplier) {
@@ -1458,8 +1577,12 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
     }
 
     public void collideProjectilesWith(AxisAlignedBB hitbox) {
-        if (hurtResistantTime < 1) {
-            List<?> list = world.getEntitiesWithinAABBExcludingEntity(this, hitbox.expand(0.5D, 0.5D, 0.5D));
+        if (hurtResistantTime < 1)
+            collideProjectilesWithList(world.getEntitiesWithinAABBExcludingEntity(this, hitbox.expand(0.5D, 0.5D, 0.5D)));
+    }
+
+    private void collideProjectilesWithList(List<?> list) {
+        {
             if (list != null && !list.isEmpty()) {
                 for (int j = 0; j < list.size(); ++j) {
                     Entity entity = (Entity)list.get(j);

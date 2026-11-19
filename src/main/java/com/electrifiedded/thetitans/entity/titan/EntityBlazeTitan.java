@@ -133,6 +133,7 @@ public class EntityBlazeTitan extends EntityTitan implements ITitanHitbox {
             }
 
             head.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
+            if (world.isRemote) // PERF — particles are client-only
             for (int u = 0; u < getParticleCount(); u++)
                 for (int w = 0; w < rodsV.length; w++)
                 world.spawnParticle(forParticle(fetchParticle()), rodsV[w].posX + (rand.nextDouble() - 0.5D) * rodsV[w].width, rodsV[w].posY + rand.nextDouble() * rodsV[w].height, rodsV[w].posZ + (rand.nextDouble() - 0.5D) * rodsV[w].width, 0D, 0D, 0D);

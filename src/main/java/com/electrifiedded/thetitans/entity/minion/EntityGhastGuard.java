@@ -182,7 +182,8 @@ public class EntityGhastGuard extends EntityCreature implements IMob, IMinion {
             }
         }
 
-        else {
+        // PERF — 200-block cube entity query; was every tick for every masterless ghast. Now every 40 ticks.
+        else if ((this.ticksExisted + this.getEntityId()) % 40 == 0) {
             List<?> list = this.world.getEntitiesWithinAABB(EntityPigZombieTitan.class, this.getEntityBoundingBox().grow(100.0D, 100.0D, 100.0D));
             if ((list != null) && (!list.isEmpty())) {
                 for (int i1 = 0; i1 < list.size(); i1++) {
@@ -332,12 +333,16 @@ public class EntityGhastGuard extends EntityCreature implements IMob, IMinion {
         super.updateAITasks();
     }
 
+    // PERF — vanilla ghast stepped 1 block at a time (one collision query per block of the waypoint distance).
+    // Steps are now half the body width: any obstacle the ghast body would hit still overlaps a sampled box.
     private boolean isTraversableCourse(double arg70790n1, double arg70790n3, double arg70790n5, double arg70790n7) {
-        double d4 = (this.xWaypoint - this.posX) / arg70790n7;
-        double d5 = (this.yWaypoint - this.posY) / arg70790n7;
-        double d6 = (this.zWaypoint - this.posZ) / arg70790n7;
+        double stride = Math.max(1.0D, this.width * 0.5D);
+        int steps = Math.max(1, (int)Math.ceil(arg70790n7 / stride));
+        double d4 = (this.xWaypoint - this.posX) / steps;
+        double d5 = (this.yWaypoint - this.posY) / steps;
+        double d6 = (this.zWaypoint - this.posZ) / steps;
         AxisAlignedBB axisalignedbb = this.getEntityBoundingBox();
-        for (int i = 1; i < arg70790n7; i++) {
+        for (int i = 1; i < steps; i++) {
             axisalignedbb = axisalignedbb.offset(d4, d5, d6);
             if (!this.world.getCollisionBoxes(this, axisalignedbb).isEmpty()) {
                 return false;

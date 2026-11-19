@@ -165,4 +165,26 @@ public final class TitanPhysics {
         MinecraftForge.EVENT_BUS.post(new GetCollisionBoxesEvent(world, entity, aabb, list));
         return list;
     }
+
+    private static final int DENSITY_STEPS = 8;
+
+    /**Explosion exposure for huge boxes on a capped sample grid, or null to let vanilla handle small boxes.*/
+    public static Float cappedBlockDensity(World world, net.minecraft.util.math.Vec3d vec, AxisAlignedBB bb) {
+        double sx = (bb.maxX - bb.minX) * 2.0D + 1.0D, sy = (bb.maxY - bb.minY) * 2.0D + 1.0D, sz = (bb.maxZ - bb.minZ) * 2.0D + 1.0D;
+        if (sx * sy * sz <= 512.0D)
+            return null;
+        int nx = Math.max(1, Math.min(DENSITY_STEPS, (int)sx)), ny = Math.max(1, Math.min(DENSITY_STEPS, (int)sy)), nz = Math.max(1, Math.min(DENSITY_STEPS, (int)sz));
+        int hit = 0, total = 0;
+        for (int ix = 0; ix <= nx; ix++)
+            for (int iy = 0; iy <= ny; iy++)
+            for (int iz = 0; iz <= nz; iz++) {
+            double x = bb.minX + (bb.maxX - bb.minX) * ix / nx;
+            double y = bb.minY + (bb.maxY - bb.minY) * iy / ny;
+            double z = bb.minZ + (bb.maxZ - bb.minZ) * iz / nz;
+            if (world.rayTraceBlocks(new net.minecraft.util.math.Vec3d(x, y, z), vec) == null)
+                hit++;
+            total++;
+        }
+        return (float)hit / (float)total;
+    }
 }

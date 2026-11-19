@@ -260,8 +260,13 @@ public final class EntityExecutorDragon extends EntityTitan implements IRangedAt
                     int i1 = i + MathHelper.getInt(this.rand, 10, 100) * MathHelper.getInt(this.rand, -1, 1);
                     int j1 = j + MathHelper.getInt(this.rand, 10, 100) * MathHelper.getInt(this.rand, -1, 1);
                     int k1 = k + MathHelper.getInt(this.rand, 10, 100) * MathHelper.getInt(this.rand, -1, 1);
+                    // PERF — cheap rolls first; the old order built a lightning entity 20x every other tick and could
+                    // load/generate chunks up to 100 blocks away through isSideSolid.
+                    BlockPos below = new BlockPos(i1, j1 - 1, k1);
+                    if (this.rand.nextInt(5) != 0 || !this.world.isBlockLoaded(below) || !this.world.isSideSolid(below, net.minecraft.util.EnumFacing.UP))
+                        continue;
                     EntityUrLightning entitylightning = new EntityUrLightning(this.world, i1, j1, k1);
-                    if (this.rand.nextInt(5) == 0 && (this.world.isSideSolid(new BlockPos(i1, j1 - 1, k1), net.minecraft.util.EnumFacing.UP)) && (this.world.checkNoEntityCollision(entitylightning.getEntityBoundingBox())) && (this.world.getCollisionBoxes(entitylightning, entitylightning.getEntityBoundingBox()).isEmpty()) && (!this.world.containsAnyLiquid(entitylightning.getEntityBoundingBox()))) {
+                    if ((this.world.checkNoEntityCollision(entitylightning.getEntityBoundingBox())) && (this.world.getCollisionBoxes(entitylightning, entitylightning.getEntityBoundingBox()).isEmpty()) && (!this.world.containsAnyLiquid(entitylightning.getEntityBoundingBox()))) {
                         this.world.addWeatherEffect(entitylightning);
                     }
                 }
