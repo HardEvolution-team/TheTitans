@@ -410,3 +410,26 @@ tile.harcadium_ore_obsidian.name=Harcadium Ore (Obsidian)
 tile.harcadium_ore_whitestone.name=Harcadium Ore (End Stone)
 tile.void_ore_obsidian.name=Void Ore (Obsidian)
 tile.void_ore_whitestone.name=Void Ore (End Stone)
+
+# Mutant Titans (Mutant Creatures Legacy integration)
+entity.thetitans.MutantZombieTitan.name=Mutant Zombie Titan
+entity.thetitans.MutantSkeletonTitan.name=Mutant Skeleton Titan
+entity.thetitans.MutantWitherSkeletonTitan.name=Mutant Wither Skeleton Titan
+entity.thetitans.MutantCreeperTitan.name=Mutant Creeper Titan
+entity.thetitans.MutantEnderColossus.name=Mutant Ender Colossus
+entity.thetitans.MutantTitan.jungle=Jungle
+entity.thetitans.MutantTitan.blood=Blood
+entity.thetitans.MutantTitan.radioactive=Radioactive
+entity.thetitans.MutantTitan.void=Void
+entity.thetitans.MutantTitan.charged=Charged
+entity.thetitans.TitanBonePart.name=Titanic Bone
+item.titanic_mutant_skeleton_pelvis.name=Titanic Mutant Skeleton Pelvis
+item.titanic_mutant_skeleton_rib.name=Titanic Mutant Skeleton Rib
+item.titanic_mutant_skeleton_limb.name=Titanic Mutant Skeleton Limb
+item.titanic_mutant_skeleton_shoulder_pad.name=Titanic Mutant Skeleton Shoulder Pad
+item.titanic_mutant_skeleton_rib_cage.name=Titanic Mutant Skeleton Rib Cage
+item.titanic_mutant_skeleton_arms.name=Titanic Mutant Skeleton Arms
+item.titanic_mutant_skeleton_helmet.name=Titanic Mutant Skeleton Skull
+item.titanic_mutant_skeleton_chestplate.name=Titanic Mutant Skeleton Chestplate
+item.titanic_mutant_skeleton_leggings.name=Titanic Mutant Skeleton Leggings
+item.titanic_mutant_skeleton_boots.name=Titanic Mutant Skeleton Boots

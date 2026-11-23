@@ -32,22 +32,19 @@ public class RenderItemBomb extends Render<EntityItemBomb> {
             GL11.glPushMatrix();
             GL11.glTranslatef((float)x, (float)y, (float)z);
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-            float f9 = 3F;
+            // Original: scale = width * 2 (6 for a 3x3 bomb) on a 1x1 icon / full block, items another x1.25.
+            // 1.12's GROUND transform shrinks items x0.5 and blocks x0.25, so render untransformed (NONE: a centred
+            // unit cube) with the original scale instead — the drops were 4-8x too small.
+            float f9 = entity.width * 2.0F;
             GL11.glScalef(f9, f9, f9);
             this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
             GL11.glTranslatef(0, MathHelper.sin(((float)entity.ticksExisted + partialTicks) / 20.0F) * 0.1F + 0.1F, 0);
             GL11.glRotatef((float) ((((float)entity.ticksExisted + y) / 40.0F) * (180F / (float)Math.PI)), 0.0F, 1.0F, 0.0F);
-            if (!entity.fetchCardWild() && !(entity.getEntityItem().getItem() instanceof ItemBlock)) {
+            if (entity.fetchCardWild() || !(entity.getEntityItem().getItem() instanceof ItemBlock))
                 GL11.glScalef(1.25F, 1.25F, 1.25F);
-                GL11.glTranslatef(-0.5F, -0.05F, 0);
-            } else if (!entity.fetchCardWild()) {
-                GL11.glTranslatef(0, 0.5F, 0);
-            } else {
-                GL11.glScalef(1.25F, 1.25F, 1.25F);
-                GL11.glTranslatef(-0.5F, -0.05F, 0);
-            }
+            GL11.glTranslatef(0, 0.5F, 0);
             RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-            renderItem.renderItem(stack, ItemCameraTransforms.TransformType.GROUND);
+            renderItem.renderItem(stack, ItemCameraTransforms.TransformType.NONE);
             GL11.glDisable(GL12.GL_RESCALE_NORMAL);
             GL11.glPopMatrix();
         }

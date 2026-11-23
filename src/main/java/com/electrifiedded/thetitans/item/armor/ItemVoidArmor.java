@@ -59,7 +59,7 @@ public class ItemVoidArmor extends ItemTitanArmor {
         super.whenTickAudio(world, entity, itemStack);
     }
 
-    public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+    public void armourTick(World world, net.minecraft.entity.EntityLivingBase player, ItemStack itemStack) {
         if (TheTitans.equipped(player, TitanGear.helmetVoid, 1)) {
             appendLongEffect(player, MobEffects.NIGHT_VISION, 0);
             addEffect(player, MobEffects.WATER_BREATHING, 0);
@@ -117,6 +117,6 @@ public class ItemVoidArmor extends ItemTitanArmor {
             }
         }
 
-        super.onArmorTick(world, player, itemStack);
+        super.armourTick(world, player, itemStack);
     }
 }

@@ -158,8 +158,8 @@ public class WorldGenStuffs implements IWorldGenerator {
 
             default:
                 {
-                    int gx = chunkX * 16 + random.nextInt(16);
-                    int gz = chunkZ * 16 + random.nextInt(16);
+                    int gx = chunkX * 16 + 8 + random.nextInt(16);
+                    int gz = chunkZ * 16 + 8 + random.nextInt(16);
                     if (random.nextFloat() <= 0.1F) {
                         switch (random.nextInt(5)) {
                             case 1:

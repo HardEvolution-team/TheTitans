@@ -62,7 +62,7 @@ public class CommandTitanBench extends CommandBase {
     }
 
     public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
-        return args.length == 1 ? getListOfStringsMatchingLastWord(args, "dormant", "awake", "none", "profile") : Collections.emptyList();
+        return args.length == 1 ? getListOfStringsMatchingLastWord(args, "dormant", "awake", "none", "profile", "mutant") : Collections.emptyList();
     }
 
     private static void msg(Run r, String s) {
@@ -78,8 +78,10 @@ public class CommandTitanBench extends CommandBase {
         if (run == null || e.phase != TickEvent.Phase.START)
             return;
         Run r = run;
-        long last = r.server.tickTimeArray[r.server.getTickCounter() % 100];
+        long last = r.server.tickTimeArray[(r.server.getTickCounter() + 99) % 100];
         r.step++;
+        if (last > 150_000_000L)
+            msg(r, String.format("BIG spike stage %d step %d: %.1f ms", r.stage, r.step, last / 1e6));
         r.server.getWorld(0).resetUpdateEntityTick(); // keep entities ticking without players
         if (r.stage == 0) {                       // baseline
             if (r.step > 5) { r.baseNs += last; r.baseN++; }
@@ -93,16 +95,23 @@ public class CommandTitanBench extends CommandBase {
             if (r.step >= 60) {
                 TitanProfiler.reset();
                 TitanProfiler.enabled = true;
+                StackSampler.start(Thread.currentThread());
                 r.stage = 2;
                 r.step = 0;
             }
         } else if (r.stage == 2) {                // measure
+            if (r.mode.startsWith("mutant"))
+                MutantBench.tick(r.server.getWorld(0), r.spawned, r.step, s -> msg(r, s));
             if (r.step > 1) {
                 r.loadNs += last; r.loadN++;
                 r.maxNs = Math.max(r.maxNs, last);
+                if (last > 40_000_000L)
+                    msg(r, String.format("spike step %d: %.1f ms", r.step, last / 1e6));
             }
             if (r.loadN >= r.ticks) {
                 TitanProfiler.enabled = false;
+                for (String line : StackSampler.stop())
+                    msg(r, line);
                 msg(r, String.format("baseline %.3f ms/tick, with titans %.3f ms/tick (max %.3f), delta %.3f ms, titans=%d",
                     r.baseNs / 1e6 / r.baseN, r.loadNs / 1e6 / r.loadN, r.maxNs / 1e6, (r.loadNs / (double)r.loadN - r.baseNs / (double)r.baseN) / 1e6, r.spawned.size()));
                 for (String line : TitanProfiler.report(r.loadN))
@@ -111,6 +120,8 @@ public class CommandTitanBench extends CommandBase {
                 for (Entity en : r.server.getWorld(0).loadedEntityList)
                     census.merge(en.getClass().getSimpleName(), 1, Integer::sum);
                 msg(r, "entities in world: " + census);
+                if (r.mode.startsWith("mutant"))
+                    MutantBench.report(r.spawned, s -> msg(r, s));
                 for (Entity en : r.spawned)
                     en.setDead();
                 msg(r, "done");
@@ -125,13 +136,33 @@ public class CommandTitanBench extends CommandBase {
         List<EntityEntry> types = new ArrayList<>();
         for (EntityEntry entry : ForgeRegistries.ENTITIES.getValuesCollection())
             if (EntityTitan.class.isAssignableFrom(entry.getEntityClass()) && !Modifier.isAbstract(entry.getEntityClass().getModifiers())
-                && (r.withBoss || entry.getEntityClass() != com.electrifiedded.thetitans.entity.titan.EntityWitherzilla.class))
-            types.add(entry);
+                && (r.withBoss || entry.getEntityClass() != com.electrifiedded.thetitans.entity.titan.EntityWitherzilla.class)
+                && (!r.mode.startsWith("mutant") || com.electrifiedded.thetitans.entity.titan.mutant.AIMutantTitanAnim.Host.class.isAssignableFrom(entry.getEntityClass())))
+            if (r.mode.indexOf('=') < 0 || entry.getEntityClass().getSimpleName().toLowerCase().contains(r.mode.substring(r.mode.indexOf('=') + 1).replace("+terrain", "").replace("+death", "").replace("+death", "")))
+                types.add(entry);
+        MutantBench.KILL = r.mode.contains("death");
+        if (r.mode.contains("terrain")) {
+            net.minecraft.block.state.IBlockState stone = net.minecraft.init.Blocks.STONE.getDefaultState();
+            for (int x = -90; x <= 90; x++)
+                for (int z = -90; z <= 90; z++)
+                    for (int y = 4; y < 40; y++)
+                        world.setBlockState(spawn.add(x, y - spawn.getY(), z), stone, 2);
+            msg(r, "terrain filled");
+            MutantBench.FAR = true;
+        }
+        if (r.mode.startsWith("blast")) {
+            String rad = r.mode.substring(r.mode.indexOf('=') + 1).replace("+terrain", "");
+            com.electrifiedded.archaiclib.world.ChunkBlast b = com.electrifiedded.archaiclib.world.ChunkBlast.of(world, spawn.getX(), 20, spawn.getZ(), Double.parseDouble(rad)).start();
+            final long t0 = System.nanoTime();
+            b.onDone = () -> msg(r, String.format("blast r=%s done: %d chunks in %.1f s", rad, b.chunksCarved(), (System.nanoTime() - t0) / 1e9));
+            return;
+        }
         int i = 0;
         for (int c = 0; c < r.copies; c++)
             for (EntityEntry entry : types) {
             // spiral-ish grid inside the always-loaded spawn area
             int gx = (i % 5) - 2, gz = (i / 5) % 5 - 2;
+            if (r.mode.startsWith("mutant")) { gx *= 3; gz *= 3; } // mutant titans are huge: keep them apart
             i++;
             int x = spawn.getX() + gx * 24 + c, z = spawn.getZ() + gz * 24 + c;
             int y = world.getHeight(x, z);
@@ -142,8 +173,11 @@ public class CommandTitanBench extends CommandBase {
                     ((EntityTitan)en).onInitialSpawn(world.getDifficultyForLocation(new BlockPos(en)), null);
                     ((EntityTitan)en).assignWaiting(r.mode.startsWith("dormant"));
                 }
-                if (world.spawnEntity(en))
+                if (world.spawnEntity(en)) {
                     r.spawned.add(en);
+                    if (r.mode.startsWith("mutant"))
+                        r.spawned.add(MutantBench.target(world, (EntityTitan)en));
+                }
             } catch (Throwable t) {
                 msg(r, "spawn failed " + entry.getRegistryName() + ": " + t);
             }

@@ -136,7 +136,7 @@ public class EntityZombieTitan extends EntityTitan implements IAnimatedEntity, I
 
     @SuppressWarnings("rawtypes")
     public boolean allowStrikeGiant(Class<?> arg70686n1) {
-        return arg70686n1 != head.getClass() && arg70686n1 != body.getClass() && arg70686n1 != rightArm.getClass() && arg70686n1 != leftArm.getClass() && arg70686n1 != rightLeg.getClass() && arg70686n1 != leftLeg.getClass() && (arg70686n1 != EntityZombieMinion.class) && (arg70686n1 != EntityGiantZombieBetter.class) && (arg70686n1 != EntityZombieTitan.class);
+        return arg70686n1 != head.getClass() && arg70686n1 != body.getClass() && arg70686n1 != rightArm.getClass() && arg70686n1 != leftArm.getClass() && arg70686n1 != rightLeg.getClass() && arg70686n1 != leftLeg.getClass() && (arg70686n1 != EntityZombieMinion.class) && (arg70686n1 != EntityGiantZombieBetter.class) && !EntityZombieTitan.class.isAssignableFrom(arg70686n1);
     }
 
     public float getRenderSizeModifier() {

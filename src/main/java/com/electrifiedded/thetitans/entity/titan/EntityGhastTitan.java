@@ -221,7 +221,7 @@ public class EntityGhastTitan extends EntityTitan {
         }
 
         if (world.isRemote) {
-            for (int i1 = 0; i1 < getParticleCount(); i1++) {
+            for (int i1 = 0; i1 < getParticleCount() && com.electrifiedded.thetitans.util.perf.TitanParticles.allow(world); i1++) {
                 world.spawnParticle(net.minecraft.util.EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * 96D, posY + rand.nextDouble() * 96D, posZ + (rand.nextDouble() - 0.5D) * 96D, 0.0D, 0.5D, 0.0D);
             }
         }

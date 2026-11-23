@@ -824,7 +824,25 @@ public class EntityCreeperTitan extends EntityTitan implements IAnimatedEntity, 
         return p_180482_2_1;
     }
 
-    private void explode() {
+    /** Block-wrecking radius of the death blast (the original wrecked a cube of this half-size in one tick). */
+    protected double blastRadius() {
+        return getPowered() ? (16D * fetchScaleMultiplierGiant()) : (8D * fetchScaleMultiplierGiant());
+    }
+
+    /**
+     * PERF — the death blast used to wreck the whole cube (up to 1536^2 x 256 cells) in a single tick: a server
+     * freeze of minutes. Now ArchaicLib's ChunkBlast carves the sphere as a shock wave under a per-tick budget.
+     */
+    protected com.electrifiedded.archaiclib.world.ChunkBlast startBlast(double radius) {
+        if (!(world instanceof net.minecraft.world.WorldServer))
+            return null;
+        com.electrifiedded.archaiclib.world.ChunkBlast blast = com.electrifiedded.archaiclib.world.ChunkBlast.of((net.minecraft.world.WorldServer)world, posX, posY + height * 0.25D, posZ, radius);
+        final long t0 = System.currentTimeMillis();
+        blast.onDone = () -> TheTitans.info(getName() + " blast r=" + (int)radius + ": " + blast.chunksCarved() + " chunks carved in " + (System.currentTimeMillis() - t0) / 1000.0D + " s");
+        return blast.start();
+    }
+
+    protected void explode() {
         for (int i = 0; i < 1000; i++) {
             float f = (rand.nextFloat() - 0.5F) * 16F;
             float f1 = (rand.nextFloat() - 0.5F) * 48F;
@@ -835,9 +853,9 @@ public class EntityCreeperTitan extends EntityTitan implements IAnimatedEntity, 
         triggerAudioGiant("thetitans:titanCreeperExplosion", Float.MAX_VALUE, 1.0F);
         triggerAudioGiant(fetchDeathAudioGiant(), getSoundVolume(), getSoundPitch());
         world.getGameRules().getBoolean("mobGriefing");
-        double d1 = getPowered() ? (16D * fetchScaleMultiplierGiant()) : (8D * fetchScaleMultiplierGiant());
+        double d1 = Math.min(blastRadius(), getPowered() ? (16D * fetchScaleMultiplierGiant()) : (8D * fetchScaleMultiplierGiant()));
         double d2 = getPowered() ? (64D * fetchScaleMultiplierGiant()) : (32D * fetchScaleMultiplierGiant());
-        wreckInAABBGriefingBypassBlocks(getEntityBoundingBox().grow(d1, d1, d1));
+        startBlast(blastRadius());
         triggerAudioGiant("thetitans:titanland", 10000.0F, 1.0F);
         for (int da = 0; da <= 10; da++) {
             List<?> list = world.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().grow(d1, d1, d1), e -> e != this);

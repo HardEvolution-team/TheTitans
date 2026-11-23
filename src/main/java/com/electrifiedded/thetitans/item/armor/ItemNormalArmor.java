@@ -34,7 +34,13 @@ public class ItemNormalArmor extends ItemArmor {
         return TheTitans.getTextures("textures/models", "armor/" + materialName + "_layer_" + (armorType == EntityEquipmentSlot.LEGS ? "2" : "1") + ".png");
     }
 
-    public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+    /** Players: vanilla hook. Other mobs: called from handler.MobArmourTicker (vanilla only ticks player armour). */
+    @Override
+    public final void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+        armourTick(world, player, itemStack);
+    }
+
+    public void armourTick(World world, net.minecraft.entity.EntityLivingBase player, ItemStack itemStack) {
         if (TheTitans.equippedAll(player, TitanGear.armourSetLead))
             player.removePotionEffect(ClientProxy.giantRadiationCreeper);
     }

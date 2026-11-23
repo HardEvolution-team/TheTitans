@@ -155,7 +155,13 @@ public class ItemTitanArmor extends ItemArmor {
         beatsAudio ++;
     }
 
-    public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+    /** Players: vanilla hook. Other mobs: called from handler.MobArmourTicker (vanilla only ticks player armour). */
+    @Override
+    public final void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+        armourTick(world, player, itemStack);
+    }
+
+    public void armourTick(World world, net.minecraft.entity.EntityLivingBase player, ItemStack itemStack) {
         // 1.7.10 base behaviour: all titan armor slowly self-repairs (maxDamage/100000 per tick).
         if (getDamage(itemStack) > 0 && getDamage(itemStack) < getMaxDamage() - 1)
             setDamage(itemStack, getDamage(itemStack) - (getMaxDamage() / 100000));
@@ -188,7 +194,8 @@ public class ItemTitanArmor extends ItemArmor {
 
     protected void addEffect(EntityLivingBase entity, Potion potion, int amplifier) {
         if (entity != null && (entity.getActivePotionEffect(potion) == null || entity.getActivePotionEffect(potion).getDuration() <= 1))
-            entity.addPotionEffect(new PotionEffect(potion, 1, amplifier, false, false));
+            // 2 ticks: mobs tick armour before their potion update, a 1-tick effect expired before it ever applied
+            entity.addPotionEffect(new PotionEffect(potion, 2, amplifier, false, false));
     }
 
     protected void appendLongEffect(EntityLivingBase entity, Potion potion, int amplifier) {

@@ -480,7 +480,7 @@ public final class EntityExecutorDragon extends EntityTitan implements IRangedAt
         }
 
         if (this.world.isRemote) {
-            for (int i1 = 0; i1 < getParticleCount(); i1++) {
+            for (int i1 = 0; i1 < getParticleCount() && com.electrifiedded.thetitans.util.perf.TitanParticles.allow(world); i1++) {
                 this.world.spawnParticle(forParticle(fetchParticle()), this.posX + (this.rand.nextDouble() - 0.5D) * (this.width * 3.0D), this.posY + this.rand.nextDouble() * 210.0D, this.posZ + (this.rand.nextDouble() - 0.5D) * (this.width * 3.0D), 0.0D, 0.5D, 0.0D);
             }
         }

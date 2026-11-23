@@ -30,6 +30,8 @@ public class ClientModelRegistry {
         for (Block block : TitanBlockSet.fetchBlocksRegistered())
             if (block != null && block.getRegistryName() != null)
             register(Item.getItemFromBlock(block));
+        for (Item item : com.electrifiedded.thetitans.compat.mutant.MutantTitanItems.ALL)
+            register(item);
     }
 
     // swap the baked builtin/entity model for the katana/axe with a perspective-recording wrapper so

@@ -1,0 +1,22 @@
+# Mutant Titans (Mutant Creatures Legacy integration); other strings fall back to en_us
+entity.thetitans.MutantZombieTitan.name=Титан-мутант зомби
+entity.thetitans.MutantSkeletonTitan.name=Титан-мутант скелет
+entity.thetitans.MutantWitherSkeletonTitan.name=Титан-мутант скелет-иссушитель
+entity.thetitans.MutantCreeperTitan.name=Титан-мутант крипер
+entity.thetitans.MutantEnderColossus.name=Колосс-мутант Края
+entity.thetitans.MutantTitan.jungle=Джунглевый
+entity.thetitans.MutantTitan.blood=Кровавый
+entity.thetitans.MutantTitan.radioactive=Радиоактивный
+entity.thetitans.MutantTitan.void=Пустотный
+entity.thetitans.MutantTitan.charged=Заряженный
+entity.thetitans.TitanBonePart.name=Титаническая кость
+item.titanic_mutant_skeleton_pelvis.name=Титанический таз мутанта-скелета
+item.titanic_mutant_skeleton_rib.name=Титаническое ребро мутанта-скелета
+item.titanic_mutant_skeleton_limb.name=Титаническая кость конечности мутанта-скелета
+item.titanic_mutant_skeleton_shoulder_pad.name=Титанический наплечник мутанта-скелета
+item.titanic_mutant_skeleton_rib_cage.name=Титаническая грудная клетка мутанта-скелета
+item.titanic_mutant_skeleton_arms.name=Титанические руки мутанта-скелета
+item.titanic_mutant_skeleton_helmet.name=Титанический череп мутанта-скелета
+item.titanic_mutant_skeleton_chestplate.name=Титанический нагрудник мутанта-скелета
+item.titanic_mutant_skeleton_leggings.name=Титанические поножи мутанта-скелета
+item.titanic_mutant_skeleton_boots.name=Титанические ботинки мутанта-скелета

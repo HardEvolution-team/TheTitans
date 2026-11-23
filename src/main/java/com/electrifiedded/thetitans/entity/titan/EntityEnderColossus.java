@@ -464,7 +464,7 @@ public class EntityEnderColossus extends EntityTitan implements IAnimatedEntity,
             ofCrystalsNum = 0;
         }
 
-        for (int i = 0; i < getParticleCount() * 5; i++) {
+        for (int i = 0; i < getParticleCount() * 5 && com.electrifiedded.thetitans.util.perf.TitanParticles.allow(world); i++) {
             locateToLookAtUser();
             world.spawnParticle(EnumParticleTypes.PORTAL, posX + (rand.nextDouble() - 0.5D) * width * 3.0D, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width * 3.0D, 0.0D, 0.25D, 0.0D);
         }

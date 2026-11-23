@@ -130,7 +130,7 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Random;
 
-@Mod(modid = TheTitans.MODID_V, name = TheTitans.MODNAME_V, version = TheTitans.VERSION, dependencies = "required-after:archaiclib@[1.5.1,)", guiFactory = "com.electrifiedded.thetitans.config.TitanConfigGui")
+@Mod(modid = TheTitans.MODID_V, name = TheTitans.MODNAME_V, version = TheTitans.VERSION, dependencies = "required-after:archaiclib@[1.20.0,);after:mutantbeasts", guiFactory = "com.electrifiedded.thetitans.config.TitanConfigGui")
 public class TheTitans {
     public static final String MODNAME_V = "The Titans Port";
     public static final String MODID_V = "thetitans";
@@ -272,6 +272,7 @@ public class TheTitans {
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new RealmHandler());
         MinecraftForge.EVENT_BUS.register(new com.electrifiedded.thetitans.handler.TitanVigor());
+        MinecraftForge.EVENT_BUS.register(new com.electrifiedded.thetitans.handler.MobArmourTicker());
         MinecraftForge.EVENT_BUS.register(PortAttributionHandler.class);
         if (event.getSide() == Side.SERVER)
             MinecraftForge.EVENT_BUS.register(new PulseHandler(null));
@@ -596,6 +597,19 @@ public class TheTitans {
             return entity != null && (entity instanceof EntityItem || entity instanceof EntityEnderPearl || entity instanceof EntityFallingBlock || entity instanceof EntityMinecart || entity instanceof EntityItemFrame || entity instanceof EntityPainting || entity instanceof EntityXPOrb || entity instanceof EntityWeatherEffect);
         else
             return entity != null && !(entity instanceof EntityLivingBase);
+    }
+
+    /** Armour auras worn by a non-player (villager etc.): only its target and monsters (when it is not one) are foes. */
+    public static boolean checkFriendlyFire(EntityLivingBase wearer, Entity entity, boolean refinedCheck) {
+        if (wearer instanceof EntityPlayer)
+            return checkFriendlyFire((EntityPlayer)wearer, entity, refinedCheck);
+        if (entity == null || wearer == null || !(entity instanceof EntityLivingBase))
+            return false;
+        if (wearer.isOnSameTeam(entity))
+            return true;
+        if (wearer instanceof net.minecraft.entity.EntityLiving && ((net.minecraft.entity.EntityLiving)wearer).getAttackTarget() == entity)
+            return false;
+        return !(entity instanceof net.minecraft.entity.monster.IMob) || wearer instanceof net.minecraft.entity.monster.IMob;
     }
 
     public static boolean checkFriendlyFire(EntityPlayer player, Entity entity, boolean refinedCheck) {

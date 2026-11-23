@@ -95,12 +95,32 @@ public class EntityZombieMinion extends EntityZombie implements IRangedAttackMob
         tasks.addTask(1, new EntityAIMoveTowardsRestriction(this, 1.2D));
         tasks.addTask(1, new EntityAIRestrictSun(this));
         tasks.addTask(1, new EntityAIFleeSun(this, 1.2D));
-        tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
+        tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true) {
+            @Override
+            public void updateTask() {
+                if (attacker.getAttackTarget() != null)
+                    super.updateTask();
+            }
+        });
         tasks.addTask(0, new EntityAIFindEntityNearestInjuredAlly(this));
         if (TheTitans.ffaModeTitans)
             targetTasks.addTask(0, new EntityAINearestTargetTitan(this, EntityLivingBase.class, 0, false, false, ITitan.giantSorterZombie));
         else
             targetTasks.addTask(0, new EntityAINearestTargetTitan(this, EntityLivingBase.class, 0, false, false, ITitan.forAThingToKillSearch));
+    }
+
+    @Override
+    protected void applyEntityAI() {
+        super.applyEntityAI();
+        // vanilla EntityAIZombieAttack.updateTask has no null check; the minion clears its target mid-tick
+        tasks.taskEntries.removeIf(e -> e.action instanceof net.minecraft.entity.ai.EntityAIZombieAttack);
+        tasks.addTask(2, new net.minecraft.entity.ai.EntityAIZombieAttack(this, 1.0D, false) {
+            @Override
+            public void updateTask() {
+                if (attacker.getAttackTarget() != null)
+                    super.updateTask();
+            }
+        });
     }
 
     protected void applyEntityAttributes() {

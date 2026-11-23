@@ -53,6 +53,8 @@ public class WorldGenVein extends WorldGenerator {
         net.minecraft.block.state.pattern.BlockMatcher matchers[] = new net.minecraft.block.state.pattern.BlockMatcher[bases.size()];
         for (int bi = 0; bi < bases.size(); bi++)
             matchers[bi] = BlockMatcher.forBlock(bases.get(bi));
+        final net.minecraft.block.state.IBlockState oreState = ore.getStateFromMeta(cubeMetaMineable);
+        final int nb = bases.size();
         for (int l = 0; l <= amount; ++l) {
             double d6 = d0 + (d1 - d0) * (double)l / (double)amount;
             double d7 = d4 + (d5 - d4) * (double)l / (double)amount;
@@ -78,9 +80,9 @@ public class WorldGenVein extends WorldGenerator {
                             continue;
                         BlockPos target = new BlockPos(k2, l2, i3);
                         net.minecraft.block.state.IBlockState targetState = world.getBlockState(target);
-                        for (int bi = 0; bi < bases.size(); bi++)
+                        for (int bi = 0; bi < nb; bi++)
                             if (targetState.getBlock().isReplaceableOreGen(targetState, world, target, matchers[bi])) {
-                            world.setBlockState(target, ore.getStateFromMeta(cubeMetaMineable), 2);
+                            world.setBlockState(target, oreState, 2);
                             break;
                         }
                     }

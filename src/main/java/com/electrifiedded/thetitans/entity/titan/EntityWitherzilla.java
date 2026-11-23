@@ -427,7 +427,7 @@ public final class EntityWitherzilla extends EntityTitan implements IRangedAttac
                 for (int j = 0; j < 3; j++)
                 world.spawnParticle(EnumParticleTypes.SPELL_MOB, posX + rand.nextGaussian() * 32.0D, posY + rand.nextFloat() * 210.0F, posZ + rand.nextGaussian() * 32.0D, 0.699999988079071D, 0.699999988079071D, 0.8999999761581421D);
             if (isClient())
-                for (int i1 = 0; i1 < getParticleCount(); i1++)
+                for (int i1 = 0; i1 < getParticleCount() && com.electrifiedded.thetitans.util.perf.TitanParticles.allow(world); i1++)
                 world.spawnParticle(forParticle(fetchParticle()), posX + (rand.nextDouble() - 0.5D) * (width * 3.0D), posY + rand.nextDouble() * 210.0D, posZ + (rand.nextDouble() - 0.5D) * (width * 3.0D), 0.0D, 0.5D, 0.0D);
         }
 

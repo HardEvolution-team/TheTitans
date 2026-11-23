@@ -158,7 +158,11 @@ public class TitanBossBarGui extends Gui {
     private static TitanBarStyle fetchBarStyleGiant(EntityTitan titan) {
         if (titan instanceof EntitySkeletonTitan && ((EntitySkeletonTitan)titan).fetchKindSkeleton() == 1)
             return SKELETON_BAR_WITHER;
-        return BAR_STYLES_GIANT.get(titan.getClass());
+        TitanBarStyle style = BAR_STYLES_GIANT.get(titan.getClass());
+        // subclasses (Mutant Titans) use their parent titan's bar
+        for (Class<?> c = titan.getClass().getSuperclass(); style == null && c != null && EntityTitan.class.isAssignableFrom(c); c = c.getSuperclass())
+            style = BAR_STYLES_GIANT.get(c);
+        return style;
     }
 
     private long discoveryBeatPrev = Long.MIN_VALUE / 2;

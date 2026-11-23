@@ -147,6 +147,14 @@ public class ClientProxy extends CommonProxy {
 
     public void preInit(FMLPreInitializationEvent e) {
         TitanVisuals.init();
+        com.electrifiedded.thetitans.util.perf.HitchWatch.install();
+        com.electrifiedded.thetitans.util.perf.TitanParticles.counter = () -> {
+            try {
+                return Integer.parseInt(Minecraft.getMinecraft().effectRenderer.getStatistics());
+            } catch (RuntimeException ex) {
+                return 0;
+            }
+        };
         guiIngameZ = new TitanBossBarGui(Minecraft.getMinecraft());
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(guiIngameZ);
         super.preInit(e);
@@ -257,6 +265,14 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(com.electrifiedded.thetitans.entity.titan.EntitySilverfishTitan.class, manager -> new com.electrifiedded.thetitans.client.render.entity.RenderOmegafish(manager));
         RenderingRegistry.registerEntityRenderingHandler(com.electrifiedded.thetitans.entity.titan.EntityCaveSpiderTitan.class, manager -> new com.electrifiedded.thetitans.client.render.entity.RenderCaveSpiderTitan(manager));
         RenderingRegistry.registerEntityRenderingHandler(com.electrifiedded.thetitans.entity.titan.EntitySpiderTitan.class, manager -> new com.electrifiedded.thetitans.client.render.entity.RenderSpiderTitan(manager));
+        if (com.electrifiedded.thetitans.compat.mutant.MutantTitans.loaded()) {
+            RenderingRegistry.registerEntityRenderingHandler(com.electrifiedded.thetitans.entity.titan.mutant.EntityMutantZombieTitan.class, com.electrifiedded.thetitans.client.render.mutant.RenderMutantZombieTitan::new);
+            RenderingRegistry.registerEntityRenderingHandler(com.electrifiedded.thetitans.entity.titan.mutant.EntityMutantSkeletonTitan.class, com.electrifiedded.thetitans.client.render.mutant.RenderMutantSkeletonTitan::new);
+            RenderingRegistry.registerEntityRenderingHandler(com.electrifiedded.thetitans.entity.titan.mutant.EntityMutantCreeperTitan.class, com.electrifiedded.thetitans.client.render.mutant.RenderMutantCreeperTitan::new);
+            RenderingRegistry.registerEntityRenderingHandler(com.electrifiedded.thetitans.entity.titan.mutant.EntityMutantEnderColossus.class, com.electrifiedded.thetitans.client.render.mutant.RenderMutantEnderColossus::new);
+            RenderingRegistry.registerEntityRenderingHandler(com.electrifiedded.thetitans.entity.titan.mutant.EntityTitanBonePart.class, com.electrifiedded.thetitans.client.render.mutant.RenderTitanBonePart::new);
+            RenderingRegistry.registerEntityRenderingHandler(com.electrifiedded.thetitans.entity.titan.mutant.EntityTitanThrownBlock.class, com.electrifiedded.thetitans.client.render.mutant.RenderTitanThrownBlock::new);
+        }
         RenderingRegistry.registerEntityRenderingHandler(com.electrifiedded.thetitans.entity.titan.EntityZombieTitan.class, manager -> new com.electrifiedded.thetitans.client.render.entity.RenderZombieTitan(manager));
         RenderingRegistry.registerEntityRenderingHandler(com.electrifiedded.thetitans.entity.titan.EntitySkeletonTitan.class, manager -> new com.electrifiedded.thetitans.client.render.entity.RenderSkeletonTitan(manager));
         RenderingRegistry.registerEntityRenderingHandler(com.electrifiedded.thetitans.entity.titan.EntityCreeperTitan.class, manager -> new com.electrifiedded.thetitans.client.render.entity.RenderCreeperTitan(manager));

@@ -15,7 +15,7 @@ public class ItemPigIronArmor extends ItemNormalArmor {
         super(materialName, material, type);
     }
 
-    public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+    public void armourTick(World world, net.minecraft.entity.EntityLivingBase player, ItemStack itemStack) {
         if (this.ticks >= 80 + player.getRNG().nextInt(1000)) {
             world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PIG_AMBIENT, SoundCategory.PLAYERS, 1.0F, Maths.random(0.8F, 1.2F), false);
             this.ticks = 0;

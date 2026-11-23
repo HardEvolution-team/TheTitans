@@ -134,7 +134,7 @@ public class EntityBlazeTitan extends EntityTitan implements ITitanHitbox {
 
             head.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
             if (world.isRemote) // PERF — particles are client-only
-            for (int u = 0; u < getParticleCount(); u++)
+            for (int u = 0; u < getParticleCount() && com.electrifiedded.thetitans.util.perf.TitanParticles.allow(world); u++)
                 for (int w = 0; w < rodsV.length; w++)
                 world.spawnParticle(forParticle(fetchParticle()), rodsV[w].posX + (rand.nextDouble() - 0.5D) * rodsV[w].width, rodsV[w].posY + rand.nextDouble() * rodsV[w].height, rodsV[w].posZ + (rand.nextDouble() - 0.5D) * rodsV[w].width, 0D, 0D, 0D);
         }
@@ -284,7 +284,7 @@ public class EntityBlazeTitan extends EntityTitan implements ITitanHitbox {
         isAirBorne = true;
         onGround = false;
         if ((world.isRemote) && (deathTicks < fetchHoldThreash())) {
-            for (int i = 0; i < getParticleCount(); i++)
+            for (int i = 0; i < getParticleCount() && com.electrifiedded.thetitans.util.perf.TitanParticles.allow(world); i++)
                 world.spawnParticle(forParticle(fetchParticle()), posX + (rand.nextDouble() - 0.5D) * width, posY - 24.0D + rand.nextDouble() * 32.0D, posZ + (rand.nextDouble() - 0.5D) * width, 0D, 0D, 0D);
             if ((TheTitans.isDifficulty(world, TheCore.NIGHTMARE_V) == true) && (rand.nextInt(20) == 0)) {
                 for (int i = 0; i < 2; i++) {

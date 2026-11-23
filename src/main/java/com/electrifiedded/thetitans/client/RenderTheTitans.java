@@ -155,6 +155,7 @@ public class RenderTheTitans {
         buildGiant(com.electrifiedded.thetitans.entity.titan.classic.EntityOgPigZombieTitan.class, "OgPigZombieTitan");
         createEntity(com.electrifiedded.thetitans.entity.misc.EntityEnderSquid.class, "EnderSquid");
         buildGiant(EntityExecutorDragon.class, "EnderDragonTitan");
+        com.electrifiedded.thetitans.compat.mutant.MutantTitans.registerEntities();
 
         EntityRegistry.addSpawn(EntityBlaze.class, 50, 2, 2, EnumCreatureType.MONSTER, Biomes.HELL);
         EntityRegistry.addSpawn(EntityWither.class, 1, 1, 1, EnumCreatureType.MONSTER, Biomes.HELL);

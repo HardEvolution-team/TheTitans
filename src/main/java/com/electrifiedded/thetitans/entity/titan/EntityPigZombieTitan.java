@@ -297,7 +297,7 @@ public class EntityPigZombieTitan extends EntityTitan implements IAnimatedEntity
         }
 
         if ((world.isRemote) && (deathTicks < fetchHoldThreash()) && (isWet())) {
-            for (int i = 0; i < getParticleCount() * 50; i++) {
+            for (int i = 0; i < getParticleCount() * 50 && com.electrifiedded.thetitans.util.perf.TitanParticles.allow(world); i++) {
                 world.spawnParticle(titanForParticle(fetchParticle()), posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.25D, 0.0D);
             }
         }

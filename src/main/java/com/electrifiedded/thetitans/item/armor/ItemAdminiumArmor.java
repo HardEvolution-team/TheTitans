@@ -72,7 +72,7 @@ public class ItemAdminiumArmor extends ItemTitanArmor {
         super.whenTickAudio(world, entity, itemStack);
     }
 
-    public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+    public void armourTick(World world, net.minecraft.entity.EntityLivingBase player, ItemStack itemStack) {
         itemStack.setItemDamage(itemStack.getItemDamage() - 10);
         if (TheTitans.equipped(player, TitanGear.helmetAdminium, 1)) {
             appendLongEffect(player, MobEffects.NIGHT_VISION, 0);
@@ -146,7 +146,7 @@ public class ItemAdminiumArmor extends ItemTitanArmor {
                 for (int i1 = 0; i1 < list.size(); i1++) {
                     Entity entity = (Entity)list.get(i1);
                     if (!TheTitans.checkEntityBlacklist(entity, false) && !TheTitans.checkFriendlyFire(player, entity, false) && !(entity instanceof EntityTitan) && !(entity instanceof EntityHarcadiumArrow)) {
-                        entity.attackEntityFrom(EntityTitan.isSpawnBossToExemptOre(entity) ? DamageSource.causePlayerDamage(player).setDamageBypassesArmor() : DamageSourceExtra.radiation, EntityTitan.isSpawnBossToExemptOre(entity) ? 50000F : 500F);
+                        entity.attackEntityFrom(EntityTitan.isSpawnBossToExemptOre(entity) ? (player instanceof EntityPlayer ? DamageSource.causePlayerDamage((EntityPlayer)player) : DamageSource.causeMobDamage(player)).setDamageBypassesArmor() : DamageSourceExtra.radiation, EntityTitan.isSpawnBossToExemptOre(entity) ? 50000F : 500F);
                         entity.hurtResistantTime = 0;
 
                         if (entity instanceof EntityLivingBase)
@@ -183,6 +183,6 @@ public class ItemAdminiumArmor extends ItemTitanArmor {
             player.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.0D);
         }
 
-        super.onArmorTick(world, player, itemStack);
+        super.armourTick(world, player, itemStack);
     }
 }

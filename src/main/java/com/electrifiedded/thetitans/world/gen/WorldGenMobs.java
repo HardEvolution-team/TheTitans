@@ -60,7 +60,7 @@ public class WorldGenMobs implements IWorldGenerator {
             return;
         Maths.refreshRandom(rand);
         EntityLivingBase entity = null;
-        Vec3 vectors = new Vec3(chunkX * 16, 0, chunkZ * 16);
+        Vec3 vectors = new Vec3(chunkX * 16 + 8, 0, chunkZ * 16 + 8);
         int attempts = 0;
         BlockPos spawn = world.getSpawnPoint();
         for (Vec3 last : birthPrev.values())

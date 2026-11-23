@@ -168,6 +168,8 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
 
     public void readEntityFromNBT(NBTTagCompound tagCompund) {
         super.readEntityFromNBT(tagCompund);
+        if (isSummonedGiant())
+            experienceValue = 0;
         setAnimID(tagCompund.getInteger("AnimationId"));
         setAnimTick(tagCompund.getInteger("AnimationTick"));
         assignVariantGiant(tagCompund.getInteger("Variant"));
@@ -462,7 +464,7 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
             setAttackTarget(null);
 
         if (isClient() && ticksExisted % 2 == 0 && (deathTicks < fetchHoldThreash()) && (!(this instanceof EntityWitherzilla))) {
-            for (int i = 0; i < getParticleCount(); i++) {
+            for (int i = 0; i < getParticleCount() && com.electrifiedded.thetitans.util.perf.TitanParticles.allow(world); i++) {
                 if (particlesBeUpwardNeeds)
                     world.spawnParticle(forParticle(fetchParticle()), posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.25D, 0.0D);
                 else
@@ -632,7 +634,7 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
     }
 
     protected void whenUpdateMinion() {
-        if (isServer() && fetchMinion() != null && !fetchWaiting() && getAnimID() != 13 && !(world.provider instanceof WorldProviderVoid) && (TitanConfig.limitServant < 0 || minionsNum + priestsNum + zealotsNum + bishopNum + templarNum + lordsNum < TitanConfig.limitServant) && getHealth() > 0.0F && TheTitans.getDifficulty(world) != 0) {
+        if (isServer() && fetchMinion() != null && !fetchWaiting() && !isSummonedGiant() && getAnimID() != 13 && !(world.provider instanceof WorldProviderVoid) && (TitanConfig.limitServant < 0 || minionsNum + priestsNum + zealotsNum + bishopNum + templarNum + lordsNum < TitanConfig.limitServant) && getHealth() > 0.0F && TheTitans.getDifficulty(world) != 0) {
             if (specialMinionsNum < fetchMinionCapSpecial() && rand.nextInt(100) == 0)
                 emitMinion(fetchMinion(), 6);
             else {
@@ -798,6 +800,18 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
         return true;
     }
 
+    /** Forge-data flag of titans called in by another titan (e.g. the Mutant Zombie Titan's roar): no loot, no xp. */
+    public static final String SUMMONED_TAG = "thetitans:summoned";
+
+    public boolean isSummonedGiant() {
+        return getEntityData().getBoolean(SUMMONED_TAG);
+    }
+
+    public void markSummonedGiant() {
+        getEntityData().setBoolean(SUMMONED_TAG, true);
+        experienceValue = 0;
+    }
+
     // IRangedAttackMob now requires setSwingingArms; titans have no dedicated arm-swing flag.
     public void setSwingingArms(boolean swingingArms) {}
 
@@ -941,7 +955,7 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
 
     protected void inactActionDeath() {
         world.newExplosion(this, posX, posY + 3.0D, posZ, 0.0F, false, false);
-        if (isServer() && world.getGameRules().getBoolean("doMobLoot")) {
+        if (isServer() && world.getGameRules().getBoolean("doMobLoot") && !isSummonedGiant()) {
             dropFewItems(true, 0);
             dropEquipment(true, 0);
             shedDropRare(1);
@@ -1473,7 +1487,7 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
                 captureDrops = true;
                 capturedDrops.clear();
                 int j = 0;
-                if (canDropLoot() && world.getGameRules().getBoolean("doMobLoot")) {
+                if (canDropLoot() && world.getGameRules().getBoolean("doMobLoot") && !isSummonedGiant()) {
                     dropFewItems(recentlyHit > 0, i);
                     dropEquipment(recentlyHit > 0, i);
                     if (recentlyHit > 0) {
@@ -2343,8 +2357,15 @@ public class EntityTitan extends EntityCreature implements ITitan, ITitanHitbox 
         double value = fetchAmountHp();
         IAttributeInstance maxHealth = getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
         if (maxHealth.getBaseValue() != value) {
+            // BUGFIX — the max depends on fetchScaleMultiplierGiant(), which shrinks while a titan dies
+            // (deathTicks >= 800): the old full heal here revived dying titans every tick ("defeated" again and
+            // again, the mutant zombie never died). Keep the health fraction; never heal a dead/dying titan.
+            float oldMax = getMaxHealth(), hp = getHealth();
             maxHealth.setBaseValue(value);
-            setHealth(getMaxHealth());
+            if (hp > 0.0F && deathTicks <= 0)
+                setHealth(oldMax > 0.0F ? (float)Math.min(getMaxHealth(), hp / oldMax * getMaxHealth()) : getMaxHealth());
+            else if (hp > getMaxHealth())
+                setHealth(getMaxHealth());
         }
     }
 
