@@ -21,7 +21,7 @@ public class BlockNormal extends Block implements IReloadable, IBurnable {
     private int amount = 1;
     private int experience[] = new int[2];
     private int burnTime;
-    private Random rand = new Random();
+    private Random rand = new com.electrifiedded.archaiclib.util.FastRandom();
 
     public BlockNormal(String name, int harvestLevel, float hardness, float resistance) {
         super(Material.ROCK);

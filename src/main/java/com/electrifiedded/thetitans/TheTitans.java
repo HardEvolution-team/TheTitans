@@ -130,7 +130,7 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Random;
 
-@Mod(modid = TheTitans.MODID_V, name = TheTitans.MODNAME_V, version = TheTitans.VERSION, dependencies = "required-after:archaiclib@[1.20.0,);after:mutantbeasts", guiFactory = "com.electrifiedded.thetitans.config.TitanConfigGui")
+@Mod(modid = TheTitans.MODID_V, name = TheTitans.MODNAME_V, version = TheTitans.VERSION, dependencies = "required-after:archaiclib@[1.40.0,);after:mutantbeasts", guiFactory = "com.electrifiedded.thetitans.config.TitanConfigGui")
 public class TheTitans {
     public static final String MODNAME_V = "The Titans Port";
     public static final String MODID_V = "thetitans";
@@ -683,7 +683,7 @@ public class TheTitans {
     }
 
     public static void generateFurnace(World world, BlockPos pos, EnumFacing facing) {
-        Random rand = new Random();
+        Random rand = new com.electrifiedded.archaiclib.util.FastRandom();
         world.setBlockState(pos, Blocks.FURNACE.getDefaultState().withProperty(BlockFurnace.FACING, facing), 2);
         TileEntity tile = world.getTileEntity(pos);
         if (tile instanceof TileEntityFurnace) {

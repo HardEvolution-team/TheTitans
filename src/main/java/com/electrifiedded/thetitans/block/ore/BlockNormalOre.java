@@ -27,7 +27,7 @@ public class BlockNormalOre extends BlockOre implements IReloadable {
     private int amount = 1;
     private int experience[] = new int[2];
     public boolean renderItem;
-    private Random rand = new Random();
+    private Random rand = new com.electrifiedded.archaiclib.util.FastRandom();
 
     public BlockNormalOre(String name, int harvestLevel, float hardness, float resistance) {
         this(null, name, harvestLevel, hardness, resistance);

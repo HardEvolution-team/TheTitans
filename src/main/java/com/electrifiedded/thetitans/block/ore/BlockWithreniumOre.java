@@ -31,7 +31,7 @@ public class BlockWithreniumOre extends BlockNormalOre {
         setSoundType(SoundType.STONE);
     }
 
-    private Random rand = new Random();
+    private Random rand = new com.electrifiedded.archaiclib.util.FastRandom();
 
     @Override
     public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {

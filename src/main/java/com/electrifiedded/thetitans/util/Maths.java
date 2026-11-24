@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**A simple math library that can be used to simplify math related calculations*/
 public class Maths {
-    private static Random random = new Random();
+    private static Random random = new com.electrifiedded.archaiclib.util.FastRandom();
     /**Used to create 2D vectors for positioning calculations*/
     public static class Vec {
         /**Position X of this 2D vector*/
@@ -145,7 +145,7 @@ public class Maths {
 
     /**Changes the randomizer to a new randomizer.*/
     public static void refreshRandom() {
-        refreshRandom(new Random());
+        refreshRandom(new com.electrifiedded.archaiclib.util.FastRandom());
     }
 
     /**Changes the randomizer to a defined randomizer.*/

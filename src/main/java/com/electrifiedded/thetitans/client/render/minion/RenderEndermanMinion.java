@@ -16,7 +16,7 @@ import java.util.Random;
 public class RenderEndermanMinion extends RenderLiving<EntityEndermanMinion> {
     private static final ResourceLocation texturesEnderman = new ResourceLocation("textures/entity/enderman/enderman.png");
     private ModelEnderman meshEnderman;
-    private Random rnd = new Random();
+    private Random rnd = new com.electrifiedded.archaiclib.util.FastRandom();
 
     public RenderEndermanMinion(RenderManager renderManager) {
         super(renderManager, new ModelEnderman(0.0F), 0.5F);

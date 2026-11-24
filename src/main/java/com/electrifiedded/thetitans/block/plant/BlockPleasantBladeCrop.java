@@ -77,7 +77,7 @@ public class BlockPleasantBladeCrop extends BlockCrops {
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         super.getDrops(drops, world, pos, state, fortune);
         int metadata = getAge(state);
-        Random rand = world instanceof World ? ((World)world).rand : new Random();
+        Random rand = world instanceof World ? ((World)world).rand : new com.electrifiedded.archaiclib.util.FastRandom();
         if (metadata >= 6) {
             for (int i = 0; i < 1 + rand.nextInt(3) + fortune; ++i) {
                 drops.add(new ItemStack(TitanGear.bladeLeafPleasant, 1, 0));

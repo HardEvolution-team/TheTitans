@@ -72,9 +72,9 @@ public class RenderUrLightning extends Render<EntityGammaLightning> {
                         d6 += (double)(random1.nextInt(31) - 15);
                     }
 
-                    float cr = new Random().nextFloat();
-                    float cg = new Random().nextFloat();
-                    float cb = new Random().nextFloat();
+                    float cr = com.electrifiedded.archaiclib.util.FastRandom.shared().nextFloat();
+                    float cg = com.electrifiedded.archaiclib.util.FastRandom.shared().nextFloat();
+                    float cb = com.electrifiedded.archaiclib.util.FastRandom.shared().nextFloat();
                     buffer.begin(5, DefaultVertexFormats.POSITION_COLOR);
                     double d9 = 0.1D + (double)k1 * 0.2D;
                     if (j == 0) {

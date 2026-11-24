@@ -57,7 +57,7 @@ public class ItemGoodTurret extends ItemSword {
         entity.setPlayerCreated(true);
         entity.onInitialSpawn(worldIn.getDifficultyForLocation(pos), (IEntityLivingData)null);
         entity.world.playBroadcastSound(1013, pos, 0);
-        Random rand = new Random();
+        Random rand = new com.electrifiedded.archaiclib.util.FastRandom();
         if (a > 0) {
             entity.tierDurability = a;
         }

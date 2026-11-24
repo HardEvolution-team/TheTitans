@@ -1,0 +1,19 @@
+{
+  "_comment": "Where ArchaicLib downloads the original files of this port from. Edit freely; set locked=true to keep your edits when the mod updates. Files go to archaic_originals/ and are checked by sha256.",
+  "port": "thetitans",
+  "version": 3,
+  "locked": false,
+  "files": [
+    {
+      "file": "The Titans MC 1.7.10 version-0.5 beta v0712.jar",
+      "name": "The Titans MC 1.7.10 version-0.5 beta v0712.jar (by Enderman_of_D00M)",
+      "sha256": "9bf1610071436d70b2bd9531d798f659e02bbcbbd45128b49a302cb10b6cfd76",
+      "size": 35284332,
+      "page": "https://www.curseforge.com/minecraft/mc-mods/the-titans-mod/files/3828537",
+      "mirrors": [
+        "https://mediafilez.forgecdn.net/files/3828/537/The%20Titans%20MC%201.7.10%20version-0.5%20beta%20v0712.jar",
+        "https://cdn.modrinth.com/data/4px3rAEy/versions/NHpYTJ2I/The%20Titans%20MC%201.7.10%20version-0.5%20beta%20v0712.jar"
+      ]
+    }
+  ]
+}
