@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.4
+### Fixed
+- Naturally spawned titans no longer carve a pit at world 0,0 (near spawn): the spawn-clearing ran on the titan's box before it was moved to its spawn point, so every worldgen titan dug out a shaft/room at the origin.
+
 ## 1.2.3
 ### Changed
 - The original mod file is now downloaded automatically on first start (needs ArchaicLib 1.42.0+): sources and mirrors are listed in `config/archaiclib/originals/` and can be edited there. If the download fails, a banner on the main menu links to the manual download.

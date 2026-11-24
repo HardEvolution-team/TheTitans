@@ -77,12 +77,15 @@ public class WorldGenMobs implements IWorldGenerator {
                         continue;
                     }
                     vectors.yVec = world.getTopSolidOrLiquidBlock(new BlockPos((int)vectors.xVec, 0, (int)vectors.zVec)).getY();
+                    // FIX — the clearing used to run BEFORE the titan was positioned, i.e. on its default box at
+                    // world 0,0 (y 0..height): every worldgen titan spawn carved a pit at the origin (near spawn),
+                    // and titans of different sizes stacked into a "shaft + room" hole. Position first, then clear.
+                    entity.setLocationAndAngles(vectors.xVec + 0.5F + Maths.random(16), vectors.yVec, vectors.zVec + 0.5F + Maths.random(16), Maths.random(360.0F), 0.0F);
                     if (entity instanceof EntityTitan) {
                         ((EntityTitan) entity).wreckInAABBGriefingBypassBlocks(entity.getEntityBoundingBox());
                         ((EntityTitan) entity).onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entity)), (IEntityLivingData)null);
                     }
 
-                    entity.setLocationAndAngles(vectors.xVec + 0.5F + Maths.random(16), vectors.yVec, vectors.zVec + 0.5F + Maths.random(16), Maths.random(360.0F), 0.0F);
                     TheTitans.debug(entity.getName() +  "[" + (birthPrev.size() - 1) + "] [" + vectors.distance(spawn.getX(), spawn.getY(), spawn.getZ()) +  "] spawned at X:" + entity.posX + ", Y:" + entity.posY + ", Z:" + entity.posZ);
                     world.spawnEntity(entity);
                     birthPrev.put(entity, vectors);
