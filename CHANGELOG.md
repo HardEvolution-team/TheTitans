@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.2.7
+### Fixed
+- Crash (ArrayIndexOutOfBoundsException in WorldGenVein) when an ore vein reached below Y 0 or above Y 255, e.g. when entering the Void Island dimension.
+
+## 1.2.6
+### Performance
+- Titan ore veins in chunks that are still being generated are written directly into the chunk instead of through the world (no lighting or neighbour updates). Combined with 1.2.5 this roughly halves the cost of titan ore generation.
+
+## 1.2.5
+### Performance
+- Titan ore veins read blocks from a cached chunk instead of the world for every block, and no longer load neighbouring chunks during generation. Generating new terrain is noticeably cheaper.
+
 ## 1.2.4
 ### Fixed
 - Naturally spawned titans no longer carve a pit at world 0,0 (near spawn): the spawn-clearing ran on the titan's box before it was moved to its spawn point, so every worldgen titan dug out a shaft/room at the origin.
